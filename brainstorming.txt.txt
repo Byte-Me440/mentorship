@@ -1,0 +1,45 @@
+Possible ideas
+________________
+
+Discussion Board
+Resources page
+
+People posting availability
+	Good to show compatibility
+
+Initial Connection
+Generation of Meetings
+Mentee -> Mentor Life-Cycle
+	Introductory
+	Relationship Building
+	Growth
+	Maturation
+	Transition
+	Termination
+
+INITIAL CONNECTION
+
+Questionnaire to create account? Meyers-Briggs Personality type
+Length of mentorship program on invite to mentor
+Goals for mentorship program on initial invite
+Used to filter through, let mentee pick who they want to mentor them.
+Viewing how many mentees a person has
+Sending initial message
+Alert on Log-in for messages/incoming connections
+Chat rooms or email? (or both)
+Mentor can accept and deny mentees
+
+
+PROFILES
+Picture
+Bio
+	Job Title
+	Department
+	
+Goals
+Work Experience
+	Linked-In Import
+Academic History
+Interests (Professional and Personal)
+Availability
+
