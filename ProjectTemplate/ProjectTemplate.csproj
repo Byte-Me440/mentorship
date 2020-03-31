@@ -88,26 +88,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="application_background.jpg" />
-    <Content Include="characterSheet.html" />
-    <Content Include="createAccount.html" />
-    <Content Include="createCharacter.html" />
-    <Content Include="editCharacter.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
-    <Content Include="login_splash.jpg" />
     <Content Include="ProjectServices.asmx" />
     <Content Include="script.js" />
+    <Content Include="style.css" />
     <Content Include="Web.config" />
-    <Content Include="skills.html" />
-    <Content Include="traits.html" />
-    <Content Include="mainpage.html" />
-    <Content Include="spells.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="Feature.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
