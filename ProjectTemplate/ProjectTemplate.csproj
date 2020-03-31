@@ -3,15 +3,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion />
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B8E3FEB0-F2E8-41BB-A177-0E1FFF3CE27D}</ProjectGuid>
+    <ProjectGuid>{259A06F5-E8C4-4730-AC3C-F3118159CBD7}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>accountmanager</RootNamespace>
-    <AssemblyName>accountmanager</AssemblyName>
+    <RootNamespace>ProjectTemplate</RootNamespace>
+    <AssemblyName>ProjectTemplate</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -20,8 +19,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,30 +88,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AccountServices.asmx" />
+    <Content Include="application_background.jpg" />
+    <Content Include="characterSheet.html" />
+    <Content Include="createAccount.html" />
+    <Content Include="createCharacter.html" />
+    <Content Include="editCharacter.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
-    <Content Include="uploadbutton.aspx" />
+    <Content Include="login_splash.jpg" />
+    <Content Include="ProjectServices.asmx" />
+    <Content Include="script.js" />
     <Content Include="Web.config" />
+    <Content Include="skills.html" />
+    <Content Include="traits.html" />
+    <Content Include="mainpage.html" />
+    <Content Include="spells.html" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="AccountServices.asmx.cs">
-      <DependentUpon>AccountServices.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="Feature.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ProjectServices.asmx.cs">
+      <DependentUpon>ProjectServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="uploadbutton.aspx.cs">
-      <DependentUpon>uploadbutton.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="uploadbutton.aspx.designer.cs">
-      <DependentUpon>uploadbutton.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -128,7 +130,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
-    <Folder Include="uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -143,9 +144,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50406</DevelopmentServerPort>
+          <DevelopmentServerPort>50287</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50406/</IISUrl>
+          <IISUrl>http://localhost:50287/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -154,6 +155,11 @@
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -161,15 +167,5 @@
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  
-  
-  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
-    <ItemGroup>
-      <RoslynFiles Include="$(CscToolPath)\*" />
-    </ItemGroup>
-    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
-    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
-</Target>
-  
   -->
 </Project>
