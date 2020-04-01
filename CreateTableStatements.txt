@@ -1,0 +1,66 @@
+/* Create statement for Mentee Table */
+CREATE TABLE `byteme`.`Mentee` (
+  `MenteeId` TINYINT NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  `Location` VARCHAR(45) NULL,
+  `JobTitle` VARCHAR(45) NULL,
+  `Department` VARCHAR(45) NULL,
+  `EdLevel` VARCHAR(45) NULL,
+  `EdFocus` VARCHAR(75) NULL,
+  `University` VARCHAR(75) NULL,
+  `GradDate` VARCHAR(45) NULL,
+  `CareerGoals` VARCHAR(150) NULL,
+  `MyersBriggs` VARCHAR(15) NULL,
+  `Hobbies` VARCHAR(150) NULL,
+  `AvailabilityTimes` VARCHAR(150) NULL,
+  `AvailabilityType` VARCHAR(45) NULL,
+  `Bio` VARCHAR(250) NULL,
+  PRIMARY KEY (`MenteeId`),
+  UNIQUE INDEX `MenteeId_UNIQUE` (`MenteeId` ASC))
+ENGINE = InnoDB;
+
+
+/* Create statement for Mentor Table */
+CREATE TABLE `byteme`.`Mentor` (
+  `MentorId` TINYINT NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  `Location` VARCHAR(45) NULL,
+  `JobTitle` VARCHAR(45) NULL,
+  `Department` VARCHAR(45) NULL,
+  `EdLevel` VARCHAR(45) NULL,
+  `EdFocus` VARCHAR(75) NULL,
+  `University` VARCHAR(75) NULL,
+  `GradDate` VARCHAR(45) NULL,
+  `CareerGoals` VARCHAR(150) NULL,
+  `MyersBriggs` VARCHAR(15) NULL,
+  `Hobbies` VARCHAR(150) NULL,
+  `AvailabilityTimes` VARCHAR(150) NULL,
+  `AvailabilityType` VARCHAR(45) NULL,
+  `Bio` VARCHAR(250) NULL,
+  `MentorFocus` VARCHAR(45) NULL,
+  PRIMARY KEY (`MentorId`),
+  UNIQUE INDEX `MentorId_UNIQUE` (`MentorId` ASC))
+ENGINE = InnoDB;
+
+
+/* Create statement for MessageQueue Table */
+CREATE TABLE `byteme`.`MessageQueue` (
+  `MenteeId` TINYINT NOT NULL,
+  `MentorId` TINYINT NOT NULL,
+  `TimeFrame` VARCHAR(45) NOT NULL,
+  `Message` VARCHAR(300) NOT NULL,
+  PRIMARY KEY (`MenteeId`, `MentorId`))
+ENGINE = InnoDB;
+
+
+/* Create statement for Paired Table */
+CREATE TABLE `byteme`.`Paired` (
+  `MenteeId` TINYINT NOT NULL,
+  `MentorId` TINYINT NOT NULL,
+  `TimeFrame` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`MenteeId`, `MentorId`))
+ENGINE = InnoDB;
