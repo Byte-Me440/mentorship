@@ -206,3 +206,5 @@ namespace ProjectTemplate
         {
             return "Empty Function";
         }
+    }
+}
