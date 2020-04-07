@@ -2,9 +2,265 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Home</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style type="text/css">
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,142,174,1) 35%, rgba(0,212,255,1) 100%);
+            width: 100%;
+            padding: 100px;
+        }
+
+        .container {
+            border-radius: 10px;
+            box-shadow: 15px 20px 0px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+
+        main {
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 30px;
+            display: block;
+            background-color: #FFFFFF;
+            overflow: auto;
+        }
+
+        header {
+            background-color: #A9A9A9;
+            color: #FFFFFF;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            margin-top: 5px;
+            font-family: Georgia, serif;
+            letter-spacing: 0.15em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 0.5em
+        }
+
+        h2 {
+            margin-bottom: 0;
+            margin-top: 0;
+            font-family: Georgia, serif;
+            letter-spacing: 0.25em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            text-align: center;
+            background-color: #D3D3D3;
+        }
+
+        .topNav {
+            border-bottom: 2px solid #666666;
+            border-width: 1px 0;
+            padding: 0.5em;
+            background-color: #8B8F84;
+            text-align: center;
+        }
+
+        .pages {
+            font-weight: bold;
+            padding: 1.5em;
+            font-size: 120%;
+            float: left;
+            clear: both;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        nav li {
+            border-bottom: 1px solid #000033;
+            background-color: #000033;
+            padding: 8px;
+            margin-bottom: 2px;
+            width: 180px;
+        }
+
+        nav a:link {
+	        color: #5C7FA3;
+        }
+
+        nav a:visited {
+	        color: #344873;
+        }
+
+        nav a:hover {
+            color: #A52A2A;
+        }
+
+        nav a {
+	        text-decoration: none;
+        }
+
+        .contents {
+            overflow-y: scroll;
+            height: 600px;
+            width: auto;
+            resize: none; /* Remove this if you want the user to resize the textarea */
+        }
+
+        .profile-box {
+            float: left;
+            text-align: center;
+        }
+
+    </style>
+
 </head>
 <body>
+
+    <div class="container">
+
+        <br>
+
+        <header>
+            <h1>Home</h1>
+        </header>
+
+        <nav class="topNav">
+            <button>Create Connection</button>
+            <button>Messages</button>
+            <button>Edit</button>
+            <button>Log Out</button>
+        </nav>
+
+        <div class="profile-box">
+            <h4>Julia Pagliaro</h4>
+            <h5>Phoenix, AZ</h5>
+        </div>
+
+        <nav class="pages">
+            <ul>
+                <li><a href="#profile_bio">Bio</a></li>
+                <li><a href="#profile_job">Job</a></li>
+                <li><a href="#profile_experience">Experience</a></li>
+                <li><a href="#profile_availability">Availability</a></li>
+            </ul>
+        </nav>
+
+        <main>
+
+            <h2>Welcome <label>jnpaglia</label> </h2>
+
+            <div class="contents">
+                <section>
+                    <a id="profile_bio">
+                        <h3>Bio</h3>
+
+                        <p>
+                            Lorem ipsum dolor sit amet, ei vix numquam similique, causae senserit eos ea. Legimus complectitur
+                            qui ea, et vis menandri platonem dignissim, diceret perfecto scriptorem in usu. An enim philosophia
+                            voluptatibus duo. Mel eu feugiat placerat deserunt. Sed ad sint ullamcorper. Veritus maluisset nam ei,
+                            eripuit repudiandae liberavisse no nec.
+                        </p>
+
+                        <p>
+                            An liber vocent pro. Semper volutpat nam in. Vim cu simul conclusionemque, at verear tibique quo.
+                            Quando minimum accumsan in pri. Vix tollit libris no, ea zril vivendum eleifend nec.
+                        </p>
+
+                        <p>
+                            Id bonorum ponderum cum, nulla percipit accommodare eam ea. Nisl quot mentitum ex cum, unum omnis putant
+                            ex vim, ex mei aeque melius deterruisset. Ex nec omnes nostrum epicurei, nec ei illum ridens debitis.
+                            Gloriatur interesset an pro, eros mucius mel ad. In sea possit delectus sapientem, ea dicta quidam mea.
+                            In veri nobis salutatus mel, has cu dolore malorum deleniti.
+                        </p>
+
+                        <p>
+                            Quod enim simul ut usu. No sumo alienum salutandi eos, albucius accusata qui an. Vel omnis insolens
+                            sadipscing ut, sit in alterum nominati, vis virtute consequuntur et. Ius velit aperiri copiosae te,
+                            magna partem libris ne vel, cum in hinc mnesarchum. Oratio patrioque ea qui, commodo petentium ad has.
+                        </p>
+                    </a>
+                </section>
+
+                <section>
+                    <a id="profile_job">
+                        <h3>Job</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, ei vix numquam similique, causae senserit eos ea. Legimus complectitur
+                            qui ea, et vis menandri platonem dignissim, diceret perfecto scriptorem in usu. An enim philosophia
+                            voluptatibus duo. Mel eu feugiat placerat deserunt. Sed ad sint ullamcorper. Veritus maluisset nam ei,
+                            eripuit repudiandae liberavisse no nec.
+                        </p>
+
+                        <p>
+                            An liber vocent pro. Semper volutpat nam in. Vim cu simul conclusionemque, at verear tibique quo.
+                            Quando minimum accumsan in pri. Vix tollit libris no, ea zril vivendum eleifend nec.
+                        </p>
+
+                        <p>
+                            Id bonorum ponderum cum, nulla percipit accommodare eam ea. Nisl quot mentitum ex cum, unum omnis putant
+                            ex vim, ex mei aeque melius deterruisset. Ex nec omnes nostrum epicurei, nec ei illum ridens debitis.
+                            Gloriatur interesset an pro, eros mucius mel ad. In sea possit delectus sapientem, ea dicta quidam mea.
+                            In veri nobis salutatus mel, has cu dolore malorum deleniti.
+                        </p>
+
+                        <p>
+                            Quod enim simul ut usu. No sumo alienum salutandi eos, albucius accusata qui an. Vel omnis insolens
+                            sadipscing ut, sit in alterum nominati, vis virtute consequuntur et. Ius velit aperiri copiosae te,
+                            magna partem libris ne vel, cum in hinc mnesarchum. Oratio patrioque ea qui, commodo petentium ad has.
+                        </p>
+                    </a>
+                </section>
+
+                <section>
+                    <a id="profile_experience">
+                        <h3>Experience</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, ei vix numquam similique, causae senserit eos ea. Legimus complectitur
+                            qui ea, et vis menandri platonem dignissim, diceret perfecto scriptorem in usu. An enim philosophia
+                            voluptatibus duo. Mel eu feugiat placerat deserunt. Sed ad sint ullamcorper. Veritus maluisset nam ei,
+                            eripuit repudiandae liberavisse no nec.
+                        </p>
+
+                        <p>
+                            An liber vocent pro. Semper volutpat nam in. Vim cu simul conclusionemque, at verear tibique quo.
+                            Quando minimum accumsan in pri. Vix tollit libris no, ea zril vivendum eleifend nec.
+                        </p>
+                    </a>
+                </section>
+
+                <section>
+                    <a id="profile_availability">
+                        <h3>Availability</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, ei vix numquam similique, causae senserit eos ea. Legimus complectitur
+                            qui ea, et vis menandri platonem dignissim, diceret perfecto scriptorem in usu. An enim philosophia
+                            voluptatibus duo. Mel eu feugiat placerat deserunt. Sed ad sint ullamcorper. Veritus maluisset nam ei,
+                            eripuit repudiandae liberavisse no nec.
+                        </p>
+                    </a>
+                </section>
+
+            </div>
+
+        </main>
+
+        <br>
+
+    </div>
+
 
 </body>
 </html>
