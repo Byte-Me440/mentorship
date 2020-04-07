@@ -10,11 +10,6 @@
 
     <style type="text/css">
 
-
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             background: rgb(2,0,36);
             background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,142,174,1) 35%, rgba(0,212,255,1) 100%);
@@ -36,9 +31,12 @@
             display: block;
             background-color: #FFFFFF;
             overflow: auto;
+            clear: right;
+            font-family: Georgia, serif;
         }
 
         header {
+            border-radius: 5px;
             background-color: #A9A9A9;
             color: #FFFFFF;
         }
@@ -54,6 +52,7 @@
         }
 
         h2 {
+            border-radius: 5px;
             margin-bottom: 0;
             margin-top: 0;
             font-family: Georgia, serif;
@@ -64,20 +63,30 @@
             background-color: #D3D3D3;
         }
 
+        h4 {
+            font-family: Georgia, serif;
+        }
+
+        h5 {
+            font-family: Georgia, serif;
+        }
+
         .topNav {
-            border-bottom: 2px solid #666666;
+            border-radius: 5px;
             border-width: 1px 0;
             padding: 0.5em;
-            background-color: #8B8F84;
+            background-color: #ffffff;
             text-align: center;
+            float: right;
+            font-family: Georgia, serif;
         }
 
         .pages {
-            font-weight: bold;
             padding: 1.5em;
-            font-size: 120%;
+            font-size: 100%;
             float: left;
             clear: both;
+            font-family: Georgia, serif;
         }
 
         nav ul {
@@ -90,26 +99,42 @@
 
         nav li {
             border-bottom: 1px solid #000033;
-            background-color: #000033;
+            background-color: #0084a5;
             padding: 8px;
             margin-bottom: 2px;
             width: 180px;
+            border-radius: 5px;
         }
 
         nav a:link {
-	        color: #5C7FA3;
+            color: #ffffff;
         }
 
         nav a:visited {
-	        color: #344873;
+            color: #ffffff;
         }
 
         nav a:hover {
-            color: #A52A2A;
+            color: #00556a;
+            text-decoration: none;
         }
 
         nav a {
 	        text-decoration: none;
+        }
+
+        button {
+            border-radius: 5px;
+            background-color: #0084a5;
+            border: none;
+            color: white;
+            padding: 15px 44px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            margin: 2px 10px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
         .contents {
@@ -120,9 +145,22 @@
         }
 
         .profile-box {
+            width: 220px;
             float: left;
             text-align: center;
+            clear: both;
         }
+
+        .profile-pic {
+            height: 150px;
+            width: 180px;
+            background-image: url('profile_img.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            float: left;
+            margin: 10px;
+        }
+  
 
     </style>
 
@@ -138,14 +176,19 @@
         </header>
 
         <nav class="topNav">
-            <button>Create Connection</button>
-            <button>Messages</button>
-            <button>Edit</button>
-            <button>Log Out</button>
+            <button>Create Connection</button> 
+            <button>Messages</button> 
+            <button>Edit</button> 
+            <button>Log Out</button> 
         </nav>
+
+        <div class="profile-pic"></div>
 
         <div class="profile-box">
             <h4>Julia Pagliaro</h4>
+        </div>
+
+        <div class="profile-box">
             <h5>Phoenix, AZ</h5>
         </div>
 
@@ -160,7 +203,9 @@
 
         <main>
 
-            <h2>Welcome <label>jnpaglia</label> </h2>
+            <h2>Welcome <label>jnpaglia</label></h2>
+
+            <br>
 
             <div class="contents">
                 <section>
