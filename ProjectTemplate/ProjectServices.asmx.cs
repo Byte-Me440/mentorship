@@ -122,7 +122,7 @@ namespace ProjectTemplate
             return true;
         }
 
-        [WebMethod] //NOTICE: gotta enable session on each individual method
+        [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
         public String CreateAccount(string uid, string pass)
         {
 
@@ -219,7 +219,6 @@ namespace ProjectTemplate
             string Bio ="",
             string MentorFocus=""
             )
-
         {
             string sqlConnectString = getConString();
 
@@ -271,93 +270,8 @@ namespace ProjectTemplate
             }
         }
 
-
-
-        //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
         [WebMethod(EnableSession = true)]
-        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Inte, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages)//, string knownSkills)
-        {
-            string sqlConnectString = getConString();
-
-            //this is a simple update, with parameters to pass in values
-            string sqlUpdate =
-                "UPDATE byteme.Character SET " +
-                "Class=@Class, " +
-                "Race=@Race, " +
-                "Level=@Level, " +
-                "Health=@Health, " +
-                "Dex=@dex, " +
-                "Str=@str, " +
-                "Con=@con, " +
-                "Inte=@Inte, " +
-                "Wis=@Wis, " +
-                "Cha=@Cha, " +
-                "AttackOne=@attackOne, " +
-                "AttackTwo=@attackTwo, " +
-                "AttackThree=@attackThree, " +
-                "ArmorClass=@armorClass, " +
-                "Equipment=@equipment, " +
-                "OtherProf=@otherProf, " +
-                "Languages=@languages " +
-                "WHERE " +
-                "UserID = @userId " +
-                "AND " +
-                "CharName = @CharName";
-            //COMMENTING TO CHECK IF QUERY WORKS
-            //"KnownSkills=@knownSkills " +
-
-
-            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
-            MySqlCommand sqlCommand = new MySqlCommand(sqlUpdate, sqlConnection);
-
-            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
-            sqlCommand.Parameters.AddWithValue("@CharName", HttpUtility.UrlDecode(CharName));
-            sqlCommand.Parameters.AddWithValue("@Class", HttpUtility.UrlDecode(Class));
-            sqlCommand.Parameters.AddWithValue("@Race", HttpUtility.UrlDecode(Race));
-            sqlCommand.Parameters.AddWithValue("@Level", HttpUtility.UrlDecode(Level));
-            sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
-            sqlCommand.Parameters.AddWithValue("@Dex", HttpUtility.UrlDecode(dex));
-            sqlCommand.Parameters.AddWithValue("@Str", HttpUtility.UrlDecode(str));
-            sqlCommand.Parameters.AddWithValue("@Con", HttpUtility.UrlDecode(con));
-            sqlCommand.Parameters.AddWithValue("@Inte", HttpUtility.UrlDecode(Inte));
-            sqlCommand.Parameters.AddWithValue("@Wis", HttpUtility.UrlDecode(Wis));
-            sqlCommand.Parameters.AddWithValue("@Cha", HttpUtility.UrlDecode(Cha));
-            sqlCommand.Parameters.AddWithValue("@attackOne", HttpUtility.UrlDecode(attackOne));
-            sqlCommand.Parameters.AddWithValue("@attackTwo", HttpUtility.UrlDecode(attackTwo));
-            sqlCommand.Parameters.AddWithValue("@attackThree", HttpUtility.UrlDecode(attackThree));
-            sqlCommand.Parameters.AddWithValue("@armorClass", HttpUtility.UrlDecode(armorClass));
-            sqlCommand.Parameters.AddWithValue("@equipment", HttpUtility.UrlDecode(equipment));
-            sqlCommand.Parameters.AddWithValue("@otherProf", HttpUtility.UrlDecode(otherProf));
-            sqlCommand.Parameters.AddWithValue("@languages", HttpUtility.UrlDecode(languages));
-            //sqlCommand.Parameters.AddWithValue("@knownSkills", HttpUtility.UrlDecode(knownSkills));
-
-
-            sqlConnection.Open();
-            //we're using a try/catch so that if the query errors out we can handle it gracefully
-            //by closing the connection and moving on
-            try
-            {
-                int rowCheck = sqlCommand.ExecuteNonQuery();
-                sqlConnection.Close();
-                if (rowCheck.Equals(1))
-                {
-                    return "Successfully Edited Character";
-                }
-                else
-                {
-                    return "Changes Failed";
-                }
-            }
-            catch (Exception e)
-            {
-                sqlConnection.Close();
-                return e.ToString();
-            }
-        }
-
-
-        [WebMethod(EnableSession = true)]
-        public String DeleteCharacter(string charName)
+        public String DeleteAccount(string charName)
         {
             string sqlConnectString = getConString();
             string sqlSelect = "DELETE FROM byteme.Character WHERE UserId = @UserId AND CharName = @charName";
