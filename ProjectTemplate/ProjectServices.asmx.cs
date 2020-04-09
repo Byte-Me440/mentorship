@@ -122,7 +122,7 @@ namespace ProjectTemplate
             return true;
         }
 
-        [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
+        [WebMethod] //NOTICE: gotta enable session on each individual method
         public String CreateAccount(string uid, string pass)
         {
 
@@ -195,16 +195,198 @@ namespace ProjectTemplate
 
         }
 
+
+        //EXAMPLE OF AN INSERT QUERY WITH PARAMS PASSED IN.  BONUS GETTING THE INSERTED ID FROM THE DB!
         [WebMethod(EnableSession = true)]
-        public String ReturnMentors()
+        public string UpdateAccount(
+            int Mentorid=0,
+            int Menteeid=0, 
+            string FirstName ="", 
+            string LastName ="",
+            string Email ="",
+            string Location ="",
+            string JobTitle="",
+            string Department="",
+            string EdLevel ="",
+            string EdFocus="",
+            string University="",
+            string GradDate="",
+            string CareerGoals="",
+            string MeyersBriggs="",
+            string Hobbies="",
+            string AvailabilityTimes="",
+            string AvailabilityType="",
+            string Bio ="",
+            string MentorFocus=""
+            )
+
         {
-            return "Empty Function";
+            string sqlConnectString = getConString();
+
+            //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
+            //does is tell mySql server to return the primary key of the last inserted row.
+            // query based off the database attributes
+            string sqlUpdateMentorAccount = "";
+            string sqlUpdateMenteeAccount = "";
+            // get the userId of current session and turn object into a string. This line of code is if i wasnt sure to put here or in the js file and pass
+            // it in as a parameter rather than assigning it here
+            //var currentSessionUserId = Session["userId"].ToString();
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlMentorCommand = new MySqlCommand(sqlUpdateMentorAccount, sqlConnection);
+            MySqlCommand sqlMenteeCommand = new MySqlCommand(sqlUpdateMenteeAccount, sqlConnection);
+            
+
+            sqlConnection.Open();
+
+            try
+            {
+                // MAKE SURE THIS DOESN'T MESS WITH THE EQUIVALENCY TEST
+                // DOUBLE CHECK THIS
+                int checkRow;
+                if (Mentorid==0)
+                {
+                    checkRow = sqlMenteeCommand.ExecuteNonQuery();
+                }
+                else
+                {
+                    checkRow = sqlMentorCommand.ExecuteNonQuery();
+                }
+
+                if (checkRow.Equals(1))
+                {
+                    sqlConnection.Close();
+                    return "Account Updated";
+                }
+                else
+                {
+                    sqlConnection.Close();
+                    return "Account not updated, please try again";
+                }
+            }
+            catch (Exception e)
+            {
+                sqlConnection.Close();
+                return ("Character not updated, check all values are valid and try again" + e.ToString());
+            }
         }
 
+
+
+        //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
         [WebMethod(EnableSession = true)]
-        public String ReturnMentees()
+        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Inte, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages)//, string knownSkills)
         {
-            return "Empty Function";
+            string sqlConnectString = getConString();
+
+            //this is a simple update, with parameters to pass in values
+            string sqlUpdate =
+                "UPDATE byteme.Character SET " +
+                "Class=@Class, " +
+                "Race=@Race, " +
+                "Level=@Level, " +
+                "Health=@Health, " +
+                "Dex=@dex, " +
+                "Str=@str, " +
+                "Con=@con, " +
+                "Inte=@Inte, " +
+                "Wis=@Wis, " +
+                "Cha=@Cha, " +
+                "AttackOne=@attackOne, " +
+                "AttackTwo=@attackTwo, " +
+                "AttackThree=@attackThree, " +
+                "ArmorClass=@armorClass, " +
+                "Equipment=@equipment, " +
+                "OtherProf=@otherProf, " +
+                "Languages=@languages " +
+                "WHERE " +
+                "UserID = @userId " +
+                "AND " +
+                "CharName = @CharName";
+            //COMMENTING TO CHECK IF QUERY WORKS
+            //"KnownSkills=@knownSkills " +
+
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlUpdate, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
+            sqlCommand.Parameters.AddWithValue("@CharName", HttpUtility.UrlDecode(CharName));
+            sqlCommand.Parameters.AddWithValue("@Class", HttpUtility.UrlDecode(Class));
+            sqlCommand.Parameters.AddWithValue("@Race", HttpUtility.UrlDecode(Race));
+            sqlCommand.Parameters.AddWithValue("@Level", HttpUtility.UrlDecode(Level));
+            sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
+            sqlCommand.Parameters.AddWithValue("@Dex", HttpUtility.UrlDecode(dex));
+            sqlCommand.Parameters.AddWithValue("@Str", HttpUtility.UrlDecode(str));
+            sqlCommand.Parameters.AddWithValue("@Con", HttpUtility.UrlDecode(con));
+            sqlCommand.Parameters.AddWithValue("@Inte", HttpUtility.UrlDecode(Inte));
+            sqlCommand.Parameters.AddWithValue("@Wis", HttpUtility.UrlDecode(Wis));
+            sqlCommand.Parameters.AddWithValue("@Cha", HttpUtility.UrlDecode(Cha));
+            sqlCommand.Parameters.AddWithValue("@attackOne", HttpUtility.UrlDecode(attackOne));
+            sqlCommand.Parameters.AddWithValue("@attackTwo", HttpUtility.UrlDecode(attackTwo));
+            sqlCommand.Parameters.AddWithValue("@attackThree", HttpUtility.UrlDecode(attackThree));
+            sqlCommand.Parameters.AddWithValue("@armorClass", HttpUtility.UrlDecode(armorClass));
+            sqlCommand.Parameters.AddWithValue("@equipment", HttpUtility.UrlDecode(equipment));
+            sqlCommand.Parameters.AddWithValue("@otherProf", HttpUtility.UrlDecode(otherProf));
+            sqlCommand.Parameters.AddWithValue("@languages", HttpUtility.UrlDecode(languages));
+            //sqlCommand.Parameters.AddWithValue("@knownSkills", HttpUtility.UrlDecode(knownSkills));
+
+
+            sqlConnection.Open();
+            //we're using a try/catch so that if the query errors out we can handle it gracefully
+            //by closing the connection and moving on
+            try
+            {
+                int rowCheck = sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                if (rowCheck.Equals(1))
+                {
+                    return "Successfully Edited Character";
+                }
+                else
+                {
+                    return "Changes Failed";
+                }
+            }
+            catch (Exception e)
+            {
+                sqlConnection.Close();
+                return e.ToString();
+            }
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        public String DeleteCharacter(string charName)
+        {
+            string sqlConnectString = getConString();
+            string sqlSelect = "DELETE FROM byteme.Character WHERE UserId = @UserId AND CharName = @charName";
+
+            //set up our connection object to be ready to use our connection string
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            //set up our command object to use our connection, and our query
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            //tell our command to replace the @parameters with real values
+            //we decode them because they came to us via the web so they were encoded
+            //for transmission (funky characters escaped, mostly)
+            sqlCommand.Parameters.AddWithValue("@UserId", Session["userId"]);
+            sqlCommand.Parameters.AddWithValue("@charName", HttpUtility.UrlDecode(charName));
+
+            sqlConnection.Open();
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                sqlConnection.Close();
+                return e.ToString();
+            }
+
         }
     }
 }
