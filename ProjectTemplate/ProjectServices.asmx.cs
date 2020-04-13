@@ -123,7 +123,7 @@ namespace ProjectTemplate
         }
 
         [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
-        public String CreateAccount(string uid, string pass)
+        public String CreateAccount(string UserId, string pass)
         {
 
             string sqlConnectString = getConString();
@@ -138,8 +138,8 @@ namespace ProjectTemplate
             MySqlCommand sqlInsertCommand = new MySqlCommand(sqlInsertNewUser, sqlConnection);
 
             // SETTING PARAMETERS
-            sqlSelectUserCheckCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
-            sqlInsertCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
+            sqlSelectUserCheckCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(UserId));
+            sqlInsertCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(UserId));
             sqlInsertCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
 
             // opens up pathway to database and fills data table with user names
@@ -195,13 +195,64 @@ namespace ProjectTemplate
 
         }
 
+        [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
+        public User[] ImportUsers()
+        {
+            string sqlConnectString = getConString();
+            //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
+            //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session
+            //string sqlSelect = "SELECT id, admin FROM accounts WHERE userid=@idValue and pass=@passValue";
+            string sqlSelect = "SELECT * from USERS";
+
+            //set up our connection object to be ready to use our connection string
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            //set up our command object to use our connection, and our query
+            MySqlCommand sqlImportUsersCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            //a data adapter acts like a bridge between our command object and
+            //the data we are trying to get back and put in a table object
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlImportUsersCommand);
+            //here's the table we want to fill with the results from our query
+            DataTable sqlDt = new DataTable();
+            //here we go filling it!
+            sqlDa.Fill(sqlDt);
+            //check to see if any rows were returned.  If they were, it means it's
+            //a legit account
+
+            List<User> users = new List<User>();
+            for (int i = 0; i < sqlDt.Rows.Count; i++)
+            {
+                users.Add(new User
+                {
+                    _UserId = sqlDt.Rows[i]["UserId"].ToString(),
+                    _FirstName = sqlDt.Rows[i]["FirstName"].ToString(),
+                    _LastName = sqlDt.Rows[i]["LastName"].ToString(),
+                    _Email = sqlDt.Rows[i]["Email"].ToString(),
+                    _Location = sqlDt.Rows[i]["Location"].ToString(),
+                    _JobTitle = sqlDt.Rows[i]["JobTitle"].ToString(),
+                    _Department = sqlDt.Rows[i]["Department"].ToString(),
+                    _EdLevel = sqlDt.Rows[i]["EdLevel"].ToString(),
+                    _EdFocus = sqlDt.Rows[i]["EdFocus"].ToString(),
+                    _University = sqlDt.Rows[i]["University"].ToString(),
+                    _GradDate = sqlDt.Rows[i]["GradDate"].ToString(),
+                    _CareerGoals = sqlDt.Rows[i]["CareerGoals"].ToString().Split(','),
+                    _MyersBriggs = sqlDt.Rows[i]["MyersBriggs"].ToString(),
+                    _Hobbies = sqlDt.Rows[i]["Hobbies"].ToString().Split(','),
+                    _AvailabilityTimes = sqlDt.Rows[i]["AvailabilityTimes"].ToString().Split(','),
+                    _AvailabilityType = sqlDt.Rows[i]["AvailabilityType"].ToString().Split(','),
+                    _Bio = sqlDt.Rows[i]["Bio"].ToString(),
+                    _MentorFocus = sqlDt.Rows[i]["MentorFocus"].ToString().Split(','),
+                    _MentorFlag = Convert.ToBoolean(sqlDt.Rows[i]["MentorFlag"])
+                });
+            }
+            //convert the list of accounts to an array and return!
+            return users.ToArray();
+        }
 
         //EXAMPLE OF AN INSERT QUERY WITH PARAMS PASSED IN.  BONUS GETTING THE INSERTED ID FROM THE DB!
         [WebMethod(EnableSession = true)]
         public string UpdateAccount(
-            int Mentorid=0,
-            int Menteeid=0, 
-            string FirstName ="", 
+            string FirstName ="",
             string LastName ="",
             string Email ="",
             string Location ="",
@@ -225,16 +276,54 @@ namespace ProjectTemplate
             //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
             //does is tell mySql server to return the primary key of the last inserted row.
             // query based off the database attributes
-            string sqlUpdateMentorAccount = "";
-            string sqlUpdateMenteeAccount = "";
+            string sqlUpdateAccount =
+                "UPDATE byteme.USERS " +
+                    "SET " +
+                    "FirstName= @FirstName, "+
+                    "LastName= @LastName, "+
+                    "Email= @Email, "+
+                    "Location= @Location, "+
+                    "JobTitle= @JobTitle, "+
+                    "Department= @Department, "+
+                    "EdLevel= @EdLevel, "+
+                    "EdFocus= @EdFocus, "+
+                    "University= @University, "+
+                    "GradDate= @GradDate, "+
+                    "CareerGoals= @CareerGoals, "+
+                    "MyersBriggs= @MyersBriggs, "+
+                    "Hobbies= @Hobbies, "+
+                    "AvailabilityTimes=	@AvailabilityTimes, "+
+                    "AvailabilityType= @AvailabilityType, "+
+                    "Bio= @Bio, "+
+                    "MentorFocus= @MentorFocus "+
+                    "WHERE UserId= @UserId;"
+                ;
             // get the userId of current session and turn object into a string. This line of code is if i wasnt sure to put here or in the js file and pass
             // it in as a parameter rather than assigning it here
             //var currentSessionUserId = Session["userId"].ToString();
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
-            MySqlCommand sqlMentorCommand = new MySqlCommand(sqlUpdateMentorAccount, sqlConnection);
-            MySqlCommand sqlMenteeCommand = new MySqlCommand(sqlUpdateMenteeAccount, sqlConnection);
-            
+            MySqlCommand sqlUpdateAccountCommand = new MySqlCommand(sqlUpdateAccount, sqlConnection);
+
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@UserId", Session["UserId"]);
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@FirstName", HttpUtility.UrlDecode(FirstName));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@LastName", HttpUtility.UrlDecode(LastName));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@Email", HttpUtility.UrlDecode(Email));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@Location", HttpUtility.UrlDecode(Location));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@JobTitle", HttpUtility.UrlDecode(JobTitle));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@Department", HttpUtility.UrlDecode(Department));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@EdLevel", HttpUtility.UrlDecode(EdLevel));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@EdFocus", HttpUtility.UrlDecode(EdFocus));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@University", HttpUtility.UrlDecode(University));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@GradDate", HttpUtility.UrlDecode(GradDate));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@CareerGoals", HttpUtility.UrlDecode(CareerGoals));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@MyersBriggs", HttpUtility.UrlDecode(MeyersBriggs));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@Hobbies", HttpUtility.UrlDecode(Hobbies));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@AvailabilityTimes", HttpUtility.UrlDecode(AvailabilityTimes));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@AvailabilityType", HttpUtility.UrlDecode(AvailabilityType));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@Bio", HttpUtility.UrlDecode(Bio));
+            sqlUpdateAccountCommand.Parameters.AddWithValue("@MentorFocus", HttpUtility.UrlDecode(MentorFocus));
+
 
             sqlConnection.Open();
 
@@ -243,14 +332,9 @@ namespace ProjectTemplate
                 // MAKE SURE THIS DOESN'T MESS WITH THE EQUIVALENCY TEST
                 // DOUBLE CHECK THIS
                 int checkRow;
-                if (Mentorid==0)
-                {
-                    checkRow = sqlMenteeCommand.ExecuteNonQuery();
-                }
-                else
-                {
-                    checkRow = sqlMentorCommand.ExecuteNonQuery();
-                }
+
+                checkRow = sqlUpdateAccountCommand.ExecuteNonQuery();
+
 
                 if (checkRow.Equals(1))
                 {
@@ -268,7 +352,9 @@ namespace ProjectTemplate
                 sqlConnection.Close();
                 return ("Character not updated, check all values are valid and try again" + e.ToString());
             }
+
         }
+
 
         [WebMethod(EnableSession = true)]
         public String DeleteAccount(string charName)
