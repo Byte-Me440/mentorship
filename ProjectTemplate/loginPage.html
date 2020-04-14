@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+    <style type="text/css">
+          body {
+              background: rgb(2,0,36);
+              background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,142,174,1) 35%, rgba(0,212,255,1) 100%);
+              width: 100%;
+              padding: 100px;
+          }
+
+          /* .loginBox{
+          width:100%;
+          padding: 100px;
+        }*/
+
+          .loginPic {
+              background-image: url('loginpic.jpg');
+              background-repeat: no-repeat left bottom;
+              /*no-repeat left bottom; */
+              background-size: cover;
+              border-radius: 10px 10px;
+              padding: 0;
+              min-height: 500px;
+          }
+
+          .container {
+              border-radius: 10px;
+              box-shadow: 15px 20px 0px rgba(0,0,0,0.1);
+              background: #fff;
+          }
+
+
+          .loginInput {
+              position: relative;
+              padding: 50px 30px;
+          }
+
+              .loginInput h2 {
+                  font-size: 30px;
+                  font-weight: 800;
+                  color: #DE6262;
+                  margin-bottom: 60px;
+                  text-decoration: underline;
+              }
+
+          /*.loginInput h2:after{
+          width:280px;
+          height:5px;
+          content:" ";
+          display:block;
+          background:#0084a5;
+          margin-top:20px;
+          margin-left:auto;
+          margin-right:auto
+          border-radius:3px;
+        }*/
+
+          .login_button {
+              color: #fff;
+              background: #0084a5;
+              font-weight: 600;
+          }
+
+          .loginTitle {
+              color: blue;
+          }
+
+          .signUp {
+              padding-top: 10px;
+              /*clear: both;*/
+              float: left;
+          }
+    </style>
+
+</head>
+<body>
+
+  <div class="container">
+  <div class="row">
+    <div class="col-md-4 loginInput">
+        <h2 class="text-center loginTitle" style="color: #0084a5;">Mentorship Login</h2>
+        <form class="login-form">
+            <div class="form-group">
+              <label class="text-uppercase username" style="color: black;">Username</label>
+              <input type="text" class="form-control" id="logonId" placeholder="">
+            </div>
+
+            <div class="form-group">
+              <label class="text-uppercase password" style="color: black;">Password</label>
+              <input type="password" class="form-control" id="logonPass" placeholder="">
+            </div>
+            
+            <div class="form-group">
+              <!-- missing the onclick  -->
+                <button type="button" class="btn login_button" onclick="logon()" style="color: white;">Login</button>
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-center signUp">
+          <!-- add a link to take you to the sign up page -->
+            <p>Don't have an account? <a href="createAccountPage.html" target="_self" style="color: #00BFFF"> Sign Up</a> <p>
+        </div>
+    </div>
+
+    <div class="col-md-8 loginPic"></div>
+  </div>
+  </div>
+
+</body>
+</html>

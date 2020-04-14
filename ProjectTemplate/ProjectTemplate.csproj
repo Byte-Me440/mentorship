@@ -88,8 +88,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="createAccountPage.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="loginPage.html" />
+    <Content Include="loginpic.jpg" />
     <Content Include="ProjectServices.asmx" />
     <Content Include="script.js" />
     <Content Include="style.css" />

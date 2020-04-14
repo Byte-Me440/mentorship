@@ -56,7 +56,8 @@ function logon() {
         success: function (msg) {
             var responseFromServer = msg.d;
             if (responseFromServer == true) {
-                location.href = "mainpage.html";
+                //location.href = "mainpage.html";
+                alert("logged In");
             }
             else {
                 alert("Either Username or Password is Incorrect. Please try again.");
