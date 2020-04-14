@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Make A Connection!</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style type="text/css">
+
+
+        body {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,142,174,1) 35%, rgba(0,212,255,1) 100%);
+            width: 100%;
+            padding: 100px;
+        }
+
+        .container {
+            border-radius: 10px;
+            box-shadow: 15px 20px 0px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+
+        main {
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 30px;
+            display: block;
+            background-color: #FFFFFF;
+            overflow: auto;
+            clear: right;
+            font-family: Georgia, serif;
+        }
+
+        header {
+            border-radius: 5px;
+            background-color: #D3D3D3;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            margin-top: 5px;
+            font-family: Georgia, serif;
+            letter-spacing: 0.15em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 0.5em;
+            text-shadow: 1.5px 1.5px #808080;
+        }
+
+        h2 {
+            border-radius: 5px;
+            margin-bottom: 0;
+            margin-top: 0;
+            font-family: Georgia, serif;
+            letter-spacing: 0.25em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            text-align: center;
+            background-color: #D3D3D3;
+        }
+
+        h3 {
+            color: #0084a5;
+            font-family: Georgia, serif;
+            text-shadow: 1.5px 1.5px #CCCCCC;
+        }
+
+        h4 {
+            font-family: Georgia, serif;
+        }
+
+        h5 {
+            font-family: Georgia, serif;
+        }
+
+        .topNav {
+            border-radius: 5px;
+            border-width: 1px 0;
+            padding: 0.5em;
+            background-color: #ffffff;
+            text-align: center;
+            font-family: Georgia, serif;
+        }
+
+        .pages {
+            padding: 1.5em;
+            font-size: 100%;
+            float: left;
+            clear: both;
+            font-family: Georgia, serif;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        nav li {
+            border-bottom: 1px solid #000033;
+            background-color: #0084a5;
+            padding: 8px;
+            margin-bottom: 2px;
+            width: 180px;
+            border-radius: 5px;
+        }
+
+        nav a:link {
+            color: #ffffff;
+        }
+
+        nav a:visited {
+            color: #ffffff;
+        }
+
+        nav a:hover {
+            color: #00556a;
+            text-decoration: none;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        button {
+            border-radius: 5px;
+            background-color: #0084a5;
+            border: none;
+            color: white;
+            padding: 15px 44px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            margin: 2px 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .contents {
+            overflow-y: scroll;
+            height: 600px;
+            width: auto;
+            resize: none; /* Remove this if you want the user to resize the textarea */
+        }
+
+        .profile-box {
+            width: 220px;
+            float: left;
+            text-align: center;
+            clear: both;
+        }
+
+        .profile-pic {
+            height: 150px;
+            width: 180px;
+            background-image: url('profile_img.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            margin: 10px;
+        }
+
+        textarea {
+            height: 600px;
+            width: 600px;
+        }
+
+        .input {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .topics {
+            font-weight: bold;
+        }
+
+        .right {
+            float:right;
+            text-align: center;
+            margin-right: 30px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <br>
+
+        <header>
+            <h1>Make A Connection!</h1>
+        </header>
+
+        <main>
+
+            <!-- comment -->
+            <!-- top navigation to go to other pages, edit or log out -->
+            <nav class="topNav">
+                <div class="row">
+                    <div class="col-3">
+                        <button>My Profile</button>
+                    </div>
+                    <div class="col-3">
+                        <button>Connections</button>
+                    </div>
+                    <div class="col-3">
+                        <button>Messages</button>
+                    </div>
+                    <div class="col-3">
+                        <button>Log Out</button>
+                    </div>
+                </div>
+            </nav>
+
+            <br>
+
+            <!-- Filter Drop Down -->
+            <div class="right">
+                <div class="row">
+                    <div class="col-5">
+                        <h5><label for="filter">Filter By:</label></h5>
+                    </div>
+                    <div class="col-3">
+                        <select id="filter">
+                            <option diabled selected view>Select an Option</option>
+                            <option value="personality">Personality Type</option>
+                            <option value="availType">Availability Type</option>
+                            <option value="availTime">Availability Time</option>
+                            <option value="Location">Location</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="profile-pic"></div>
+                </div>
+                <div class="col-4">
+                    <div class="profile-pic"></div>
+                </div>
+                <div class="col-4">
+                    <div class="profile-pic"></div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
