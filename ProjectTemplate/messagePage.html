@@ -168,8 +168,9 @@
         }
 
         textarea {
-            height: 600px;
-            width: 600px;
+            height: 400px;
+            width: 800px;
+            overflow-y: scroll;
         }
 
         .input {
@@ -224,6 +225,37 @@
             </nav>
 
             <br>
+
+            <div class="row">
+                <div class="col-1">
+                    <h5><label for="mentorEmail">To: </label></h5>
+                </div>
+                <div class="col-5">
+                    <input type="email" id="mentorEmail" placeholder="Mentor Email" size="40">
+                </div>
+                <div class="col-1">
+                    <h5><label for="menteeEmail">CC: </label></h5>
+                </div>
+                <div class="col-5">
+                    <input type="email" id="menteeEmail" placeholder="Mentee Email" size="40">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <input type="text" id="subject" placeholder="Subject" size="100">
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-12">
+                    <textarea id="emailContent"></textarea>
+                </div>
+            </div>
+
+
 
         </main>
 
