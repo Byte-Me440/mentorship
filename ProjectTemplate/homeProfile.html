@@ -1,0 +1,569 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Home</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style type="text/css">
+
+        body {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,142,174,1) 35%, rgba(0,212,255,1) 100%);
+            width: 100%;
+            padding: 100px;
+        }
+
+        .container {
+            border-radius: 10px;
+            box-shadow: 15px 20px 0px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+
+        main {
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 30px;
+            display: block;
+            background-color: #FFFFFF;
+            overflow: auto;
+            clear: right;
+            font-family: Georgia, serif;
+        }
+
+        header {
+            border-radius: 5px;
+            background-color: #D3D3D3;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            margin-top: 5px;
+            font-family: Georgia, serif;
+            letter-spacing: 0.15em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 0.5em;
+            text-shadow: 1.5px 1.5px #808080;
+        }
+
+        h2 {
+            border-radius: 5px;
+            margin-bottom: 0;
+            margin-top: 0;
+            font-family: Georgia, serif;
+            letter-spacing: 0.25em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            text-align: center;
+            background-color: #D3D3D3;
+        }
+
+        h3 {
+            color: #0084a5;
+            font-family: Georgia, serif;
+            text-shadow: 1.5px 1.5px #CCCCCC;
+        }
+
+        h4 {
+            font-family: Georgia, serif;
+        }
+
+        h5 {
+            font-family: Georgia, serif;
+        }
+
+        .topNav {
+            border-radius: 5px;
+            border-width: 1px 0;
+            padding: 0.5em;
+            background-color: #ffffff;
+            text-align: center;
+            float: right;
+            font-family: Georgia, serif;
+        }
+
+        .pages {
+            padding: 1.5em;
+            font-size: 100%;
+            float: left;
+            clear: both;
+            font-family: Georgia, serif;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        nav li {
+            border-bottom: 1px solid #000033;
+            background-color: #0084a5;
+            padding: 8px;
+            margin-bottom: 2px;
+            width: 180px;
+            border-radius: 5px;
+        }
+
+        nav a:link {
+            color: #ffffff;
+        }
+
+        nav a:visited {
+            color: #ffffff;
+        }
+
+        nav a:hover {
+            color: #00556a;
+            text-decoration: none;
+        }
+
+        nav a {
+	        text-decoration: none;
+        }
+
+        button {
+            border-radius: 5px;
+            background-color: #0084a5;
+            border: none;
+            color: white;
+            padding: 15px 44px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            margin: 2px 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .contents {
+            overflow-y: scroll;
+            height: 600px;
+            width: auto;
+            resize: none; /* Remove this if you want the user to resize the textarea */
+        }
+
+        .profile-box {
+            width: 220px;
+            float: left;
+            text-align: center;
+            clear: both;
+        }
+
+        .profile-pic {
+            height: 150px;
+            width: 180px;
+            background-image: url('profile_img.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            float: left;
+            margin: 10px;
+        }
+
+        textarea {
+            height: 600px;
+            width: 600px;
+        }
+
+        .input {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .topics {
+            font-weight: bold;
+        }
+  
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <br>
+
+        <header>
+            <h1>Home</h1>
+        </header>
+
+        <!-- top navigation to go to other pages, edit or log out -->
+        <nav class="topNav">
+            <button>Create Connection</button>
+            <button>Messages</button>
+            <button>Edit</button>
+            <button>Log Out</button>
+        </nav>
+
+        <!-- left side of the page -->
+        <div class="profile-pic"></div>
+
+        <div class="profile-box">
+            <h4> <label id="fName">Julia</label> <label id="lName">Pagliaro</label> </h4>
+        </div>
+
+        <div class="profile-box">
+            <h5 id="Location">Phoenix, AZ</h5>
+        </div>
+
+        <nav class="pages">
+            <ul>
+                <li><a href="#profile_bio">Bio</a></li>
+                <li><a href="#profile_job">Job</a></li>
+                <li><a href="#profile_experience">Experience</a></li>
+                <li><a href="#profile_availability">Availability</a></li>
+            </ul>
+        </nav>
+
+        <main>
+
+            <h2>Welcome <label id="fName">Julia!</label></h2>
+
+            <br>
+
+            <div class="contents">
+                <section>
+                    <a id="profile_bio">
+
+
+                        <!-- Bio Section -->
+                        <h3>Bio</h3>
+
+                        <p id="bio"></p>
+
+                        <br>
+
+                        <!-- Myers Briggs -->
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Myers Briggs:</label>
+                            </div>
+                            <div class="col-1">
+                                <p id="myersBriggs"></p>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Hobbies -->
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="topics">Hobbies:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p id="hobby1"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p id="hobby2"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p id="hobby3"></p>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Career Goals -->
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="topics">Career Goals:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p id="goal1"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p id="goal2"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p id="goal3"></p>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    </a>
+                </section>
+
+                <section>
+                    <a id="profile_job">
+
+                        <!-- Job Section -->
+                        <h3>Job</h3>
+
+                        <br>
+
+                        <!-- Job Title -->
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Job Title:</label>
+                            </div>
+                            <div class="col-9">
+                                <p id="jobTitle"></p>
+                            </div>
+                        </div>
+
+                        <!-- Job Department -->
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Department:</label>
+                            </div>
+                            <div class="col-9">
+                                <p id="jobDept"></p>
+                            </div>
+                        </div>
+
+                        <!-- Job Location -->
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Location:</label>
+                            </div>
+                            <div class="col-9">
+                                <p id="location"></p>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    </a>
+                </section>
+
+                <section>
+                    <a id="profile_experience">
+
+                        <!-- Experience Section -->
+                        <h3>Experience</h3>
+
+                        <br>
+
+                        <!-- University Info -->
+                        <div class="row">
+                            <div class="col-2">
+                                <label class="topics">University:</label>
+                            </div>
+                            <div class="col-5">
+                                <p id="university"></p>
+                            </div>
+                            <div class="col-2">
+                                <label class="topics">Grad Date:</label>
+                            </div>
+                            <div class="col-3">
+                                <p id="gradYear"></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Education Level:</label>
+                            </div>
+                            <div class="col-9">
+                                <p id="edLevel"></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Education Focus:</label>
+                            </div>
+                            <div class="col-9">
+                                <p id="edLevel"></p>
+                            </div>
+                        </div>
+
+                        <!-- LinkedIn -->
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="topics">LinkedIn Profile:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-9">
+                                <p><a href="https://www.linkedin.com/" target="_blank" id="linkedIn"></a></p>
+                            </div>
+                        </div>
+
+
+                        <br>
+
+
+                    </a>
+                </section>
+
+                <section>
+                    <a id="profile_availability">
+
+                        <!-- Availability Section -->
+                        <h3>Availability</h3>
+
+                        <br>
+
+                        <!-- Type -->
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Availability Type:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2">
+                                <input type="checkbox" id="availEmail" value="Email" name="availType" disabled>
+                                <label for="availEmail">Email</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
+                                <label for="availPerson">In Person</label>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Times -->
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="topics">Date:</label>
+                            </div>
+                            <div class="col-9">
+                                <label class="topics">Time:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="checkbox" id="mon" name="availTime" value="Monday" disabled>
+                                <label for="mon">Monday</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="monMorning" name="availTime" value="mm" disabled>
+                                <label for="monMorning">Morning</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="monAfternoon" name="availTime" value="ma" disabled>
+                                <label for="monAfternoon">Afternoon</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="monEvening" name="availTime" value="me" disabled>
+                                <label for="monEvening">Evening</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="checkbox" id="tues" name="availTime" value="Tuesday" disabled>
+                                <label for="tues">Tuesday</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="tuesMorning" name="availTime" value="tm" disabled>
+                                <label for="tuesMorning">Morning</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="tuesAfternoon" name="availTime" value="ta" disabled>
+                                <label for="tuesAfternoon">Afternoon</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="tuesEvening" name="availTime" value="te" disabled>
+                                <label for="tuesEvening">Evening</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="checkbox" id="wed" name="availTime" value="Wednesday" disabled>
+                                <label for="wed">Wednesday</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="wedMorning" name="availTime" value="wm" disabled>
+                                <label for="wedMorning">Morning</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="wedAfternoon" name="availTime" value="wa" disabled>
+                                <label for="wedAfternoon">Afternoon</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="wedEvening" name="availTime" value="we" disabled>
+                                <label for="wedEvening">Evening</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="checkbox" id="thur" name="availTime" value="Thursday" disabled>
+                                <label for="thur">Thursday</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="thurMorning" name="availTime" value="thm" disabled>
+                                <label for="thurMorning">Morning</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="thurAfternoon" name="availTime" value="tha" disabled>
+                                <label for="thurAfternoon">Afternoon</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="thurEvening" name="availTime" value="the" disabled>
+                                <label for="thurEvening">Evening</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="checkbox" id="fri" name="availTime" value="Friday" disabled>
+                                <label for="fri">Friday</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="friMorning" name="availTime" value="fm" disabled>
+                                <label for="friMorning">Morning</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="friAfternoon" name="availTime" value="fa" disabled>
+                                <label for="friAfternoon">Afternoon</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="checkbox" id="friEvening" name="availTime" value="fe" disabled>
+                                <label for="friEvening">Evening</label>
+                            </div>
+                        </div>
+
+
+                    </a>
+                </section>
+
+            </div>
+
+        </main>
+
+        <br>
+
+    </div>
+
+
+</body>
+</html>

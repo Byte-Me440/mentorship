@@ -96,9 +96,12 @@
     <Content Include="script.js" />
     <Content Include="style.css" />
     <Content Include="Web.config" />
+    <Content Include="homeProfile.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Mentee.cs" />
+    <Compile Include="Mentor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
