@@ -199,6 +199,28 @@
         .profileContent {
             text-align: center;
         }
+
+        .pagination {
+              display: inline-block;
+              float: right;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+         .pagination a.active {
+             background-color: #4CAF50;
+             color: white;
+         }
+
+         .pagination a:hover:not(.active) {
+             background-color: #ddd;
+             border-radius: 5px;
+         }
     </style>
 
 </head>
@@ -260,7 +282,7 @@
             <div class="box">
                 <div class="row">
                     <div class="col-4">
-                        <div class="profile-pic"></div> 
+                        <div class="profile-pic"></div>
                     </div>
                     <div class="col-4">
                         <div class="profile-pic"></div>
@@ -359,6 +381,18 @@
                 </div>
             </div>
 
+            <br>
+
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">&raquo;</a>
+            </div>
 
         </main>
 
