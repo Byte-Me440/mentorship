@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="createAccountPage.html" />
+    <Content Include="editPage.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="loginPage.html" />
