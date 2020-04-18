@@ -10,16 +10,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script>
         $(document).ready(function () {
-            postUser();
+            postEditUser();
         });
     </script>
 
     <script>
-        function postUser() {
-            var webMethod = "ProjectServices.asmx/ImportUsers";
+        function postEditUser() {
+            var webMethod = "ProjectServices.asmx/ImportUsers"
             $.ajax({
                 type: "POST",
                 url: webMethod,
+
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -28,53 +29,29 @@
                     var usersID = 1;
                     console.log(usersArray);
 
-                    firstName = usersArray[usersID]._FirstName;
-                    document.getElementById("fName").innerHTML = firstName;
+                    //welcome = usersArray[usersID]._FirstName;
+                    //document.getElementById("welcomeFname").innerHTML = welcome;
 
-                    lastName = usersArray[usersID]._LastName;
-                    document.getElementById("lName").innerHTML = lastName;
+                    $("#fName").val(usersArray[usersID]._FirstName);
+                    $("#lName").val(usersArray[usersID]._LastName);
+                    $("#welcomeFname").val(usersArray[usersID]._FirstName);
 
-                    welcome = usersArray[usersID]._FirstName;
-                    document.getElementById("welcomeFname").innerHTML = welcome;
+                    $("#myersBriggs").val(usersArray[usersID]._MyersBriggs);
+                    $("#hobby1").val(usersArray[usersID]._Hobbies);
+                    $("#goal1").val(usersArray[usersID]._CareerGoals);
 
+                    $("#jobTitle").val(usersArray[usersID]._JobTitle);
+                    $("#jobDept").val(usersArray[usersID]._Department);
+                    $("#university").val(usersArray[usersID]._University);
 
-                    myers = usersArray[usersID]._MyersBriggs;
-                    document.getElementById("myersBriggs").innerHTML = myers;
+                    $("#gradYear").val(usersArray[usersID]._GradDate);
+                    $("#edLevel").val(usersArray[usersID]._EdLevel);
+                    $("#edFocus").val(usersArray[usersID]._EdFocus);
 
-                    hobbies = usersArray[usersID]._Hobbies;
-                    document.getElementById("hobby1").innerHTML = hobbies;
+                    $("#userLocation").val(usersArray[usersID]._Location);
+                    $("#jobLocation").val(usersArray[usersID]._Location);
 
-                    goals = usersArray[usersID]._CareerGoals;
-                    document.getElementById("goal1").innerHTML = goals;
-
-                    jobTitle = usersArray[usersID]._JobTitle;
-                    document.getElementById("jobTitle").innerHTML = jobTitle;
-
-                    department = usersArray[usersID]._Department;
-                    document.getElementById("jobDept").innerHTML = department;
-
-                    //location = usersArray[usersID]._Location;
-                    //document.getElementById("Location").innerHTML = location;
-
-                    university = usersArray[usersID]._University;
-                    document.getElementById("university").innerHTML = university;
-
-                    gradDate = usersArray[usersID]._GradDate;
-                    document.getElementById("gradYear").innerHTML = gradDate;
-
-                    eduLevel = usersArray[usersID]._EdLevel;
-                    document.getElementById("edLevel").innerHTML = eduLevel;
-
-                    eduFocus = usersArray[usersID]._EdFocus;
-                    document.getElementById("edFocus").innerHTML = eduFocus;
-
-                    loc = usersArray[usersID]._Location;
-                    document.getElementById("userLocation").innerHTML = loc;
-
-                    // make sure there is two different locations job vs user location
-                    jobLoc = usersArray[usersID]._Location;
-                    document.getElementById("jobLocation").innerHTML = jobLoc;
-
+                    
                     availabilityType = usersArray[usersID]._AvailabilityType;
                     console.log(availabilityType);
 
@@ -94,6 +71,67 @@
                         }).prop("checked", true);
                     }
                 }
+            });
+        }
+    </script>
+
+    <script>
+        function submitEditUsers() {
+
+            var webMethod = "ProjectServices.asmx/ImportUsers";
+
+            var fName = document.getElementById("fName").value;
+            var lName = document.getElementById("lName").value;
+
+            var myersBriggs = document.getElementById("myersBriggs").value;
+            var hobby1 = document.getElementById("hobby1").value;
+            var goal1 = document.getElementById("goal1").value;
+
+            var jobTitle = document.getElementById("jobTitle").value;
+            var jobDept = document.getElementById("jobDept").value;
+            var university = document.getElementById("university").value;
+
+            var gradYear = document.getElementById("gradYear").value;
+            var edLevel = document.getElementById("edLevel").value;
+            var edFocus = document.getElementById("edFocus").value;
+
+            var userLocation = document.getElementById("userLocation").value;
+            //var jobLocation = document.getElementById("jobLocation").value;
+
+            // dont forget to grab all the checkbox data and place in an array to insert back into the database
+
+
+            var parameters = "{\"FirstName\":\"" + encodeURI(fName)
+                + "\", \"LastName\":\"" + encodeURI(lName)
+                + "\", \"MyersBriggs\":\"" + encodeURI(myersBriggs)
+                + "\", \"Hobbies\":\"" + encodeURI(hobby1)
+                + "\", \"CareerGoals\":\"" + encodeURI(goal1)
+                + "\", \"JobTitle\":\"" + encodeURI(jobTitle)
+                + "\", \"Department\":\"" + encodeURI(jobDept)
+                + "\", \"University\":\"" + encodeURI(university)
+                + "\", \"GradDate\":\"" + encodeURI(gradYear)
+                + "\", \"EdLevel\":\"" + encodeURI(edLevel)
+                + "\", \"EdFocus\":\"" + encodeURI(edFocus)
+                + "\", \"Location\":\"" + encodeURI(userLocation)
+                + "\", \"AvailabilityTimes\":\"" + encodeURI(Wis)
+                + "\", \"AvailabilityType\":\"" + encodeURI(Cha)
+                + "\", \"armorClass\":\"" + encodeURI(armorClass)
+                + "\", \"equipment\":\"" + encodeURI(Equipment)
+                + "\", \"otherProf\":\"" + encodeURI(OtherProf)
+                + "\", \"languages\":\"" + encodeURI(Languages)
+                + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var responsefromserver = msg.d;
+                    console.log(responsefromserver);
+                    window.location.href = 'homeProfile.html';
+                },
             });
         }
     </script>
@@ -361,22 +399,7 @@
                                 <input type="text" id="hobby1" style="text-align: center;">
 
                             </div>
-
                         </div>
-
-
-                        <!--<div class="row">
-        <div class="col-12">
-            <p id="hobby2"></p>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-12">
-            <p id="hobby3"></p>
-        </div>
-    </div>-->
 
                         <br>
 
@@ -392,23 +415,7 @@
 
                         </div>
 
-
-                        <!--<div class="row">
-        <div class="col-12">
-            <p id="goal2"></p>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-12">
-            <p id="goal3"></p>
-        </div>
-    </div>-->
-
                         <br>
-
-                    
                 </section>
 
                 <section>
@@ -518,8 +525,6 @@
 
 
                         <br>
-
-
                     </a>
                 </section>
 
@@ -674,19 +679,14 @@
                                 <label for="friEvening">Evening</label>
                             </div>
                         </div>
-
-
                     </a>
                 </section>
-
             </div>
-
         </main>
 
         <br>
 
     </div>
-
 
 </body>
 </html>
