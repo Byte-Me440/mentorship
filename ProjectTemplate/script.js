@@ -32,11 +32,6 @@ function createAccount() {
     });
 }
 
-//function openCharacterSheet(id) {
-//    localStorage.setItem('usersid', id);
-//    window.location.href = 'homeProfile.html';
-//}
-
 function logon() {
     var id = document.getElementById("logonId").value;
     var pass = document.getElementById("logonPass").value;
@@ -69,69 +64,6 @@ function logon() {
     });
 }
 
-
-//function postUser() {
-//    var webMethod = "ProjectServices.asmx/ImportUsers";
-//    $.ajax({
-//        type: "POST",
-//        url: webMethod,
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (data) {
-//            var usersArray = data.d;
-//            //var usersID = localStorage.getItem('usersid');
-//            //var usersID = 1;
-//            console.log(usersArray);
-//            //console.log(usersID);
-
-//            $("#nameId").val(usersArray[usersID]._UserId);
-//            $("#fName").val(usersArray[usersID]._FirstName);
-//            $("#lName").val(usersArray[usersID]._LastName);
-//            //$("#armorClassId").val(usersArray[usersID]._Email);
-//            $("#Location").val(usersArray[usersID]._Location);
-//            $("#jobTitle").val(usersArray[usersID]._JobTitle);
-//            $("#jobDept").val(usersArray[usersID]._Department);
-//            $("#edLevel").val(usersArray[usersID]._EdLevel);
-//            $("#edFocus").val(usersArray[usersID]._EdFocus);
-//            $("#university").val(usersArray[usersID]._University);
-//            $("#gradYear").val(usersArray[usersID]._GradDate);
-//            $("#goal1").val(usersArray[usersID]._CareerGoals);
-
-//            $("#myersBriggs").val(usersArray[usersID]._MyersBriggs);
-//            $("#hobby1").val(usersArray[usersID]._Hobbies);
-//            $("#constitutionId").val(usersArray[usersID]._AvailabilityTimes);
-//            $("#intelligenceId").val(usersArray[usersID]._AvailabilityType);
-//            $("#bio").val(usersArray[usersID]._Bio);
-//            //$("#charismaId").val(usersArray[usersID]._MentorFocus);
-//            //$("#hitPointsId").val(usersArray[usersID]._MentorFlag);
-
-
-
-//            var x = usersArray[usersID]._level
-
-
-
-//            //$("#name1").val(characterArray[0]._charName);
-//            //$("#class1").val(characterArray[0]._class);
-//            //$("#level1").val(characterArray[0]._level);
-
-//            //$("#name2").val(characterArray[1]._charName);
-//            //$("#class2").val(characterArray[1]._class);
-//            //$("#level2").val(characterArray[1]._level);
-
-//            //$("#name3").val(characterArray[2]._charName);
-//            //$("#class3").val(characterArray[2]._class);
-//            //$("#level3").val(characterArray[2]._level);
-
-//            //$("#name4").val(characterArray[3]._charName);
-//            //$("#class4").val(characterArray[3]._class);
-//            //$("#level4").val(characterArray[3]._level);
-
-//        }
-//    });
-//}
-
-
 //logs the user off both at the client and at the server
 function logOff() {
     var webMethod = "ProjectServices.asmx/LogOff";
@@ -159,3 +91,86 @@ function logOff() {
     });
 }
 
+function postUser() {
+    var webMethod = "ProjectServices.asmx/ImportUsers";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var usersArray = data.d;
+            console.log(usersArray);
+            //var usersID = localStorage.getItem('usersid');
+            var usersID = localStorage.getItem("UserId") - 1;
+            console.log(usersArray);
+            console.log(usersID);
+
+            firstName = usersArray[usersID]._FirstName;
+            document.getElementById("fName").innerHTML = firstName;
+
+            lastName = usersArray[usersID]._LastName;
+            document.getElementById("lName").innerHTML = lastName;
+
+            welcome = usersArray[usersID]._FirstName;
+            document.getElementById("welcomeFname").innerHTML = welcome;
+
+
+            myers = usersArray[usersID]._MyersBriggs;
+            document.getElementById("myersBriggs").innerHTML = myers;
+
+            hobbies = usersArray[usersID]._Hobbies;
+            document.getElementById("hobby1").innerHTML = hobbies;
+
+            goals = usersArray[usersID]._CareerGoals;
+            document.getElementById("goal1").innerHTML = goals;
+
+            jobTitle = usersArray[usersID]._JobTitle;
+            document.getElementById("jobTitle").innerHTML = jobTitle;
+
+            department = usersArray[usersID]._Department;
+            document.getElementById("jobDept").innerHTML = department;
+
+            //location = usersArray[usersID]._Location;
+            //document.getElementById("Location").innerHTML = location;
+
+            university = usersArray[usersID]._University;
+            document.getElementById("university").innerHTML = university;
+
+            gradDate = usersArray[usersID]._GradDate;
+            document.getElementById("gradYear").innerHTML = gradDate;
+
+            eduLevel = usersArray[usersID]._EdLevel;
+            document.getElementById("edLevel").innerHTML = eduLevel;
+
+            eduFocus = usersArray[usersID]._EdFocus;
+            document.getElementById("edFocus").innerHTML = eduFocus;
+
+            loc = usersArray[usersID]._Location;
+            document.getElementById("userLocation").innerHTML = loc;
+
+            // make sure there is two different locations job vs user location
+            jobLoc = usersArray[usersID]._Location;
+            document.getElementById("jobLocation").innerHTML = jobLoc;
+
+            availabilityType = usersArray[usersID]._AvailabilityType;
+            console.log(availabilityType);
+
+            for (i = 0; i < availabilityType.length; i++) {
+                $("input[name='availType']").filter(function () {
+                    return availabilityType[i].indexOf(this.value) != -1;
+                }).prop("checked", true);
+            }
+
+
+            availabilityTimes = usersArray[usersID]._AvailabilityTimes;
+            console.log(availabilityTimes);
+
+            for (i = 0; i < availabilityTimes.length; i++) {
+                $("input[name='availTime']").filter(function () {
+                    return availabilityTimes[i].indexOf(this.value) != -1;
+                }).prop("checked", true);
+            }
+        }
+    });
+}
