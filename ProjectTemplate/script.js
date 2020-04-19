@@ -55,9 +55,9 @@ function logon() {
         dataType: "json",
         success: function (msg) {
             var responseFromServer = msg.d;
-            if (responseFromServer == true) {
-                //location.href = "mainpage.html";
-                alert("logged In");
+            if (responseFromServer > 0) {
+                location.href = "homeProfile.html";
+                localStorage.setItem("UserId", responseFromServer);
             }
             else {
                 alert("Either Username or Password is Incorrect. Please try again.");

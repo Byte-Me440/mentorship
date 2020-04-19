@@ -24,9 +24,11 @@
                 dataType: "json",
                 success: function (data) {
                     var usersArray = data.d;
-                    //var usersID = localStorage.getItem('usersid');
-                    var usersID = 1;
                     console.log(usersArray);
+                    //var usersID = localStorage.getItem('usersid');
+                    var usersID = localStorage.getItem("UserId") - 1;
+                    console.log(usersArray);
+                    console.log(usersID);
 
                     firstName = usersArray[usersID]._FirstName;
                     document.getElementById("fName").innerHTML = firstName;
@@ -295,7 +297,7 @@
 
         <div class="profile-box">
             <h4> <label id="fName"> </label> <label id="lName"> </label> </h4>
-            
+
         </div>
 
         <div class="profile-box">
@@ -348,11 +350,11 @@
                             <div class="col-2">
                                 <label class="topics">Hobbies:</label>
                             </div>
-      
+
                             <div class="col-10">
                                 <p id="hobby1"></p>
                             </div>
-                       
+
                         </div>
 
 
@@ -380,7 +382,7 @@
                              <div class="col-9">
                                 <p id="goal1"></p>
                              </div>
-                            
+
                         </div>
 
 
