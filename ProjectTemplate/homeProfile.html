@@ -6,7 +6,99 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script>
+        $(document).ready(function () {
+            postUser();
+        });
+    </script>
+
+    <script>
+        function postUser() {
+            var webMethod = "ProjectServices.asmx/ImportUsers";
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var usersArray = data.d;
+                    console.log(usersArray);
+                    //var usersID = localStorage.getItem('usersid');
+                    var usersID = localStorage.getItem("UserId") - 1;
+                    console.log(usersArray);
+                    console.log(usersID);
+
+                    firstName = usersArray[usersID]._FirstName;
+                    document.getElementById("fName").innerHTML = firstName;
+
+                    lastName = usersArray[usersID]._LastName;
+                    document.getElementById("lName").innerHTML = lastName;
+
+                    welcome = usersArray[usersID]._FirstName;
+                    document.getElementById("welcomeFname").innerHTML = welcome;
+
+
+                    myers = usersArray[usersID]._MyersBriggs;
+                    document.getElementById("myersBriggs").innerHTML = myers;
+
+                    hobbies = usersArray[usersID]._Hobbies;
+                    document.getElementById("hobby1").innerHTML = hobbies;
+
+                    goals = usersArray[usersID]._CareerGoals;
+                    document.getElementById("goal1").innerHTML = goals;
+
+                    jobTitle = usersArray[usersID]._JobTitle;
+                    document.getElementById("jobTitle").innerHTML = jobTitle;
+
+                    department = usersArray[usersID]._Department;
+                    document.getElementById("jobDept").innerHTML = department;
+
+                    //location = usersArray[usersID]._Location;
+                    //document.getElementById("Location").innerHTML = location;
+
+                    university = usersArray[usersID]._University;
+                    document.getElementById("university").innerHTML = university;
+
+                    gradDate = usersArray[usersID]._GradDate;
+                    document.getElementById("gradYear").innerHTML = gradDate;
+
+                    eduLevel = usersArray[usersID]._EdLevel;
+                    document.getElementById("edLevel").innerHTML = eduLevel;
+
+                    eduFocus = usersArray[usersID]._EdFocus;
+                    document.getElementById("edFocus").innerHTML = eduFocus;
+
+                    loc = usersArray[usersID]._Location;
+                    document.getElementById("userLocation").innerHTML = loc;
+
+                    // make sure there is two different locations job vs user location
+                    jobLoc = usersArray[usersID]._Location;
+                    document.getElementById("jobLocation").innerHTML = jobLoc;
+
+                    availabilityType = usersArray[usersID]._AvailabilityType;
+                    console.log(availabilityType);
+
+                    for (i = 0; i < availabilityType.length; i++) {
+                        $("input[name='availType']").filter(function () {
+                            return availabilityType[i].indexOf(this.value) != -1;
+                        }).prop("checked", true);
+                    }
+
+
+                    availabilityTimes = usersArray[usersID]._AvailabilityTimes;
+                    console.log(availabilityTimes);
+
+                    for (i = 0; i < availabilityTimes.length; i++) {
+                        $("input[name='availTime']").filter(function () {
+                            return availabilityTimes[i].indexOf(this.value) != -1;
+                        }).prop("checked", true);
+                    }
+                }
+            });
+        }
+    </script>
 
     <style type="text/css">
 
@@ -126,7 +218,7 @@
         }
 
         nav a {
-	        text-decoration: none;
+            text-decoration: none;
         }
 
         button {
@@ -180,10 +272,7 @@
         .topics {
             font-weight: bold;
         }
-  
-
     </style>
-
 </head>
 <body>
 
@@ -207,11 +296,12 @@
         <div class="profile-pic"></div>
 
         <div class="profile-box">
-            <h4> <label id="fName">Julia</label> <label id="lName">Pagliaro</label> </h4>
+            <h4> <label id="fName"> </label> <label id="lName"> </label> </h4>
+
         </div>
 
         <div class="profile-box">
-            <h5 id="Location">Phoenix, AZ</h5>
+            <h5 id="userLocation"></h5>
         </div>
 
         <nav class="pages">
@@ -225,7 +315,7 @@
 
         <main>
 
-            <h2>Welcome <label id="fName">Julia!</label></h2>
+            <h2>Welcome <label id="welcomeFname"> </label>!</h2>
 
             <br>
 
@@ -243,11 +333,13 @@
 
                         <!-- Myers Briggs -->
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label class="topics">Myers Briggs:</label>
+                                <!--<input type="text" id="myersBriggs" />-->
+                                <!--<p id="myersBriggs"></p>-->
                             </div>
-                            <div class="col-1">
-                                <p id="myersBriggs"></p>
+                            <div class="col-10">
+                                <p id="myersBriggs" style="text-align: left;"></p>
                             </div>
                         </div>
 
@@ -255,19 +347,18 @@
 
                         <!-- Hobbies -->
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-2">
                                 <label class="topics">Hobbies:</label>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
+                            <div class="col-10">
                                 <p id="hobby1"></p>
                             </div>
+
                         </div>
 
 
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-12">
                                 <p id="hobby2"></p>
                             </div>
@@ -278,25 +369,24 @@
                             <div class="col-12">
                                 <p id="hobby3"></p>
                             </div>
-                        </div>
+                        </div>-->
 
                         <br>
 
                         <!-- Career Goals -->
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-3">
                                 <label class="topics">Career Goals:</label>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
+                             <div class="col-9">
                                 <p id="goal1"></p>
-                            </div>
+                             </div>
+
                         </div>
 
 
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-12">
                                 <p id="goal2"></p>
                             </div>
@@ -307,7 +397,7 @@
                             <div class="col-12">
                                 <p id="goal3"></p>
                             </div>
-                        </div>
+                        </div>-->
 
                         <br>
 
@@ -348,7 +438,7 @@
                                 <label class="topics">Location:</label>
                             </div>
                             <div class="col-9">
-                                <p id="location"></p>
+                                <p id="jobLocation"></p>
                             </div>
                         </div>
 
@@ -395,7 +485,7 @@
                                 <label class="topics">Education Focus:</label>
                             </div>
                             <div class="col-9">
-                                <p id="edLevel"></p>
+                                <p id="edFocus"></p>
                             </div>
                         </div>
 
@@ -435,13 +525,32 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-2">
-                                <input type="checkbox" id="availEmail" value="Email" name="availType" disabled>
-                                <label for="availEmail">Email</label>
+                            <div class="col-3">
+                                <!--<input type="checkbox" id="availEmail" value="Email" name="availType" disabled>
+                                    <label for="availEmail">Email</label>-->
+                                <input type="checkbox" id="phone" value="Phone" name="availType" disabled>
+                                <label for="phone">Phone</label>
                             </div>
-                            <div class="col-2">
-                                <input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                                <label for="availPerson">In Person</label>
+
+                            <div class="col-3">
+                                <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
+                                    <label for="availPerson">In Person</label>-->
+                                <input type="checkbox" id="text" value="Text" name="availType" disabled>
+                                <label for="text">Text</label>
+                            </div>
+
+                            <div class="col-3">
+                                <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
+                                    <label for="availPerson">In Person</label>-->
+                                <input type="checkbox" id="internet" value="Internet" name="availType" disabled>
+                                <label for="internet">Internet</label>
+                            </div>
+
+                            <div class="col-3">
+                                <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
+                                    <label for="availPerson">In Person</label>-->
+                                <input type="checkbox" id="inPerson" value="In-Person" name="availType" disabled>
+                                <label for="inPerson">In-Person</label>
                             </div>
                         </div>
 
@@ -459,95 +568,95 @@
 
                         <div class="row">
                             <div class="col-3">
-                                <input type="checkbox" id="mon" name="availTime" value="Monday" disabled>
+                                <!--<input type="checkbox" id="mon" name="availTime" value="Monday" disabled>-->
                                 <label for="mon">Monday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="monMorning" name="availTime" value="mm" disabled>
+                                <input type="checkbox" id="monMorning" name="availTime" value="MM" disabled>
                                 <label for="monMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="monAfternoon" name="availTime" value="ma" disabled>
+                                <input type="checkbox" id="monAfternoon" name="availTime" value="MA" disabled>
                                 <label for="monAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="monEvening" name="availTime" value="me" disabled>
+                                <input type="checkbox" id="monEvening" name="availTime" value="ME" disabled>
                                 <label for="monEvening">Evening</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-3">
-                                <input type="checkbox" id="tues" name="availTime" value="Tuesday" disabled>
+                                <!--<input type="checkbox" id="tues" name="availTime" value="Tuesday" disabled>-->
                                 <label for="tues">Tuesday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="tuesMorning" name="availTime" value="tm" disabled>
+                                <input type="checkbox" id="tuesMorning" name="availTime" value="TM" disabled>
                                 <label for="tuesMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="tuesAfternoon" name="availTime" value="ta" disabled>
+                                <input type="checkbox" id="tuesAfternoon" name="availTime" value="TA" disabled>
                                 <label for="tuesAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="tuesEvening" name="availTime" value="te" disabled>
+                                <input type="checkbox" id="tuesEvening" name="availTime" value="TE" disabled>
                                 <label for="tuesEvening">Evening</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-3">
-                                <input type="checkbox" id="wed" name="availTime" value="Wednesday" disabled>
+                                <!--<input type="checkbox" id="wed" name="availTime" value="Wednesday" disabled>-->
                                 <label for="wed">Wednesday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="wedMorning" name="availTime" value="wm" disabled>
+                                <input type="checkbox" id="wedMorning" name="availTime" value="WM" disabled>
                                 <label for="wedMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="wedAfternoon" name="availTime" value="wa" disabled>
+                                <input type="checkbox" id="wedAfternoon" name="availTime" value="WA" disabled>
                                 <label for="wedAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="wedEvening" name="availTime" value="we" disabled>
+                                <input type="checkbox" id="wedEvening" name="availTime" value="WE" disabled>
                                 <label for="wedEvening">Evening</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-3">
-                                <input type="checkbox" id="thur" name="availTime" value="Thursday" disabled>
+                                <!--<input type="checkbox" id="thur" name="availTime" value="Thursday" disabled>-->
                                 <label for="thur">Thursday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="thurMorning" name="availTime" value="thm" disabled>
+                                <input type="checkbox" id="thurMorning" name="availTime" value="THM" disabled>
                                 <label for="thurMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="thurAfternoon" name="availTime" value="tha" disabled>
+                                <input type="checkbox" id="thurAfternoon" name="availTime" value="THA" disabled>
                                 <label for="thurAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="thurEvening" name="availTime" value="the" disabled>
+                                <input type="checkbox" id="thurEvening" name="availTime" value="THE" disabled>
                                 <label for="thurEvening">Evening</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-3">
-                                <input type="checkbox" id="fri" name="availTime" value="Friday" disabled>
+                                <!--<input type="checkbox" id="fri" name="availTime" value="Friday" disabled>-->
                                 <label for="fri">Friday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="friMorning" name="availTime" value="fm" disabled>
+                                <input type="checkbox" id="friMorning" name="availTime" value="FM" disabled>
                                 <label for="friMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="friAfternoon" name="availTime" value="fa" disabled>
+                                <input type="checkbox" id="friAfternoon" name="availTime" value="FA" disabled>
                                 <label for="friAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="friEvening" name="availTime" value="fe" disabled>
+                                <input type="checkbox" id="friEvening" name="availTime" value="FE" disabled>
                                 <label for="friEvening">Evening</label>
                             </div>
                         </div>

@@ -32,6 +32,11 @@ function createAccount() {
     });
 }
 
+//function openCharacterSheet(id) {
+//    localStorage.setItem('usersid', id);
+//    window.location.href = 'homeProfile.html';
+//}
+
 function logon() {
     var id = document.getElementById("logonId").value;
     var pass = document.getElementById("logonPass").value;
@@ -50,9 +55,9 @@ function logon() {
         dataType: "json",
         success: function (msg) {
             var responseFromServer = msg.d;
-            if (responseFromServer == true) {
-                //location.href = "mainpage.html";
-                alert("logged In");
+            if (responseFromServer > 0) {
+                location.href = "homeProfile.html";
+                localStorage.setItem("UserId", responseFromServer);
             }
             else {
                 alert("Either Username or Password is Incorrect. Please try again.");
@@ -63,6 +68,69 @@ function logon() {
         }
     });
 }
+
+
+//function postUser() {
+//    var webMethod = "ProjectServices.asmx/ImportUsers";
+//    $.ajax({
+//        type: "POST",
+//        url: webMethod,
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: function (data) {
+//            var usersArray = data.d;
+//            //var usersID = localStorage.getItem('usersid');
+//            //var usersID = 1;
+//            console.log(usersArray);
+//            //console.log(usersID);
+
+//            $("#nameId").val(usersArray[usersID]._UserId);
+//            $("#fName").val(usersArray[usersID]._FirstName);
+//            $("#lName").val(usersArray[usersID]._LastName);
+//            //$("#armorClassId").val(usersArray[usersID]._Email);
+//            $("#Location").val(usersArray[usersID]._Location);
+//            $("#jobTitle").val(usersArray[usersID]._JobTitle);
+//            $("#jobDept").val(usersArray[usersID]._Department);
+//            $("#edLevel").val(usersArray[usersID]._EdLevel);
+//            $("#edFocus").val(usersArray[usersID]._EdFocus);
+//            $("#university").val(usersArray[usersID]._University);
+//            $("#gradYear").val(usersArray[usersID]._GradDate);
+//            $("#goal1").val(usersArray[usersID]._CareerGoals);
+
+//            $("#myersBriggs").val(usersArray[usersID]._MyersBriggs);
+//            $("#hobby1").val(usersArray[usersID]._Hobbies);
+//            $("#constitutionId").val(usersArray[usersID]._AvailabilityTimes);
+//            $("#intelligenceId").val(usersArray[usersID]._AvailabilityType);
+//            $("#bio").val(usersArray[usersID]._Bio);
+//            //$("#charismaId").val(usersArray[usersID]._MentorFocus);
+//            //$("#hitPointsId").val(usersArray[usersID]._MentorFlag);
+
+
+
+//            var x = usersArray[usersID]._level
+
+
+
+//            //$("#name1").val(characterArray[0]._charName);
+//            //$("#class1").val(characterArray[0]._class);
+//            //$("#level1").val(characterArray[0]._level);
+
+//            //$("#name2").val(characterArray[1]._charName);
+//            //$("#class2").val(characterArray[1]._class);
+//            //$("#level2").val(characterArray[1]._level);
+
+//            //$("#name3").val(characterArray[2]._charName);
+//            //$("#class3").val(characterArray[2]._class);
+//            //$("#level3").val(characterArray[2]._level);
+
+//            //$("#name4").val(characterArray[3]._charName);
+//            //$("#class4").val(characterArray[3]._class);
+//            //$("#level4").val(characterArray[3]._level);
+
+//        }
+//    });
+//}
+
 
 //logs the user off both at the client and at the server
 function logOff() {

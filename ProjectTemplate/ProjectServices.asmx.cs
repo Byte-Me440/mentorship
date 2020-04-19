@@ -66,10 +66,8 @@ namespace ProjectTemplate
         }
 
         [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
-        public bool LogOn(string uid, string pass)
+        public int LogOn(string uid, string pass)
         {
-            //we return this flag to tell them if they logged in or not
-            bool success = false;
 
             //our connection string comes from our web.config file like we talked about earlier
             // use the method used up top
@@ -106,10 +104,11 @@ namespace ProjectTemplate
                 //so we can check those values later on other method calls to see if they
                 //are 1) logged in at all, and 2) and admin or not
                 Session["userId"] = sqlDt.Rows[0]["userId"];
-                success = true;
+                string user = sqlDt.Rows[0]["userId"].ToString();
+                return Int32.Parse(user);
             }
             //return the result!
-            return success;
+            return 0;
         }
 
         [WebMethod(EnableSession = true)]
