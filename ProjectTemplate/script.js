@@ -94,6 +94,9 @@ function logOff() {
 }
 
 usersArray = [];
+mentorsArray = [];
+connectionsPageDisplayArray = [];
+
 function importUsers(){
     var webMethod = "ProjectServices.asmx/ImportUsers";
     $.ajax({
@@ -105,6 +108,13 @@ function importUsers(){
         async: false,
         success: function (data) {
             usersArray = data.d;
+            // make an array with only mentors to search from
+            mentorsArray = usersArray.filter(function (e) {
+                return e._MentorFlag;
+            });
+
+            // make the mentor list the first base display on the connections page
+            connectionsPageDisplayArray = mentorsArray
         }
     })
 }
@@ -159,28 +169,50 @@ function postUser() {
     }
 }
 
-function postConnection() {
+function initialPostConnection() {
 
     //variables to determine which users we post to the page
     var firstPostedUser = 0;
     var lastPostedUser = 5;
 
-    if (firstPostedUser == 0) {
-        importUsers();
-    }
+    importUsers();
 
-    console.log(usersArray);
-    console.log("hello");
     localStorage.setItem("ConnectionPageNumber", 1);
     firstPostedUser = 0;
-    arrayIndex = firstPostedUser;
+    var arrayIndex = firstPostedUser;
+    postConnection();
 
-    // iterates across all of the users on the page
-    // maps all of first user, moves onto next
-    // counter = page counter
-    // arrayIndex = based on firstPosted User to accomodate for pages
-    for (let counter = 1; counter < 7; counter++){
+}
+
+function postConnection(connectionsArray=mentorsArray) {
+
+    var arrayIndex = 0;
+    
+    // hides all spots, enabling posting loop to show them
+    for (let counter = 1; counter < 7; counter++) {
+        
+        profilePicID = "#profilePic" + counter;
+        fnameID = "#fName" + counter;
+        expertiseID = "#expertise" + counter;
+        jobTitleID = "#jobTitle" + counter;
+        locationID = "#location" + counter;
+
+        $(profilePicID).hide();
+        $(fnameID).hide();
+        $(expertiseID).hide();
+        $(jobTitleID).hide();
+        $(locationID).hide();
+    }
+    
+    for (let counter = 1; counter < connectionsArray.length + 1; counter++) {
+
+        // iterates across all of the users on the page
+        // maps all of first user, moves onto next
+        // counter = page counter
+        // arrayIndex = based on firstPosted User to accomodate for pages
+
         // setting names of Ids
+        profilePicID = "#profilePic" + counter;
         fnameID = "#fName" + counter;
         expertiseID = "#expertise" + counter;
         jobTitleID = "#jobTitle" + counter;
@@ -188,12 +220,75 @@ function postConnection() {
 
         console.log(fnameID);
         console.log(expertiseID);
-        $(fnameID).text(usersArray[arrayIndex]._FirstName + " " + usersArray[arrayIndex]._LastName);
-        $(expertiseID).text(usersArray[arrayIndex]._EdFocus);
-        $(jobTitleID).text(usersArray[arrayIndex]._JobTitle);
-        $(locationID).text(usersArray[arrayIndex]._Location);
-        console.log(usersArray[arrayIndex]._FirstName);
-        console.log("loop is running: " + counter);
+        $(fnameID).text(connectionsArray[arrayIndex]._FirstName + " " + connectionsArray[arrayIndex]._LastName);
+        $(expertiseID).text(connectionsArray[arrayIndex]._EdFocus);
+        $(jobTitleID).text(connectionsArray[arrayIndex]._JobTitle);
+        $(locationID).text(connectionsArray[arrayIndex]._Location);
+        console.log(connectionsArray[arrayIndex]._FirstName);
         arrayIndex++;
+        
+        $(profilePicID).show();
+        $(fnameID).show();
+        $(expertiseID).show();
+        $(jobTitleID).show();
+        $(locationID).show();
+        
+
     }
 }
+
+function filterConnection() {
+    var filteredArray = [];
+
+    console.log($("#filterDropDown").val());
+    switch ($("#filterDropDown").val()) {
+        case "personality":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._MyersBriggs.toLowerCase().trim() === comparison.toLowerCase().trim();
+            })
+            console.log(filteredArray);
+            postConnection(filteredArray);
+            break;
+
+        case "availType":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._AvailabilityType.includes(comparison);
+            })
+            postConnection(filteredArray);
+            break;
+
+        case "availTime":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._AvailabilityTimes.includes(comparison);
+            })
+            postConnection(filteredArray);
+            break;
+
+        case "Location":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._Location.toLowerCase().trim() === comparison.toLowerCase().trim();
+            })
+            postConnection(filteredArray);
+            break;
+
+        case "Dept":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._Department.toLowerCase().trim() === comparison.toLowerCase().trim();
+            })
+            postConnection(filteredArray);
+            break;
+
+        default:
+            alert("Please Select a filter and try again")
+            break;
+    }
+
+        
+
+}
+

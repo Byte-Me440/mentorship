@@ -10,7 +10,7 @@
 
     <script>
         $(document).ready(function () {
-            postConnection();
+            initialPostConnection();
         });
     </script>
     <style type="text/css">
@@ -320,7 +320,7 @@
                         <input type="text" id="filterText">
                     </div>
                     <div class="col-2">
-                        <button class="go-button">Go</button>
+                        <button class="go-button" onclick="filterConnection();">Go</button>
                     </div>
                 </div>
             </div>
@@ -331,13 +331,13 @@
             <div class="box">
                 <div class="row">
                     <div class="col-4">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic" id="profilePic1"></div>
                     </div>
                     <div class="col-4">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic" id="profilePic2"></div>
                     </div>
                     <div class="col-4">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic" id="profilePic3"></div>
                     </div>
                 </div>
 
@@ -395,13 +395,13 @@
             <div class="box">
                 <div class="row">
                     <div class="col-4">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic" id="profilePic4"></div>
                     </div>
                     <div class="col-4">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic" id="profilePic5"></div>
                     </div>
                     <div class="col-4">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic" id="profilePic6"></div>
                     </div>
                 </div>
 
