@@ -32,11 +32,6 @@ function createAccount() {
     });
 }
 
-//function openCharacterSheet(id) {
-//    localStorage.setItem('usersid', id);
-//    window.location.href = 'homeProfile.html';
-//}
-
 function logon() {
     var id = document.getElementById("logonId").value;
     var pass = document.getElementById("logonPass").value;
@@ -45,7 +40,7 @@ function logon() {
 
     var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
 
-
+    $("body").css("cursor", "progress");
     //jQuery ajax method
     $.ajax({
         type: "POST",
@@ -56,81 +51,20 @@ function logon() {
         success: function (msg) {
             var responseFromServer = msg.d;
             if (responseFromServer > 0) {
-                location.href = "homeProfile.html";
                 localStorage.setItem("UserId", responseFromServer);
+                location.href = "homeProfile.html";
             }
             else {
                 alert("Either Username or Password is Incorrect. Please try again.");
+                $("body").css("cursor", "default");
             }
         },
         error: function (e) {
             console.log("this code will only execute if javascript is unable to access the webservice");
+            $("body").css("cursor", "default");
         }
     });
 }
-
-
-//function postUser() {
-//    var webMethod = "ProjectServices.asmx/ImportUsers";
-//    $.ajax({
-//        type: "POST",
-//        url: webMethod,
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (data) {
-//            var usersArray = data.d;
-//            //var usersID = localStorage.getItem('usersid');
-//            //var usersID = 1;
-//            console.log(usersArray);
-//            //console.log(usersID);
-
-//            $("#nameId").val(usersArray[usersID]._UserId);
-//            $("#fName").val(usersArray[usersID]._FirstName);
-//            $("#lName").val(usersArray[usersID]._LastName);
-//            //$("#armorClassId").val(usersArray[usersID]._Email);
-//            $("#Location").val(usersArray[usersID]._Location);
-//            $("#jobTitle").val(usersArray[usersID]._JobTitle);
-//            $("#jobDept").val(usersArray[usersID]._Department);
-//            $("#edLevel").val(usersArray[usersID]._EdLevel);
-//            $("#edFocus").val(usersArray[usersID]._EdFocus);
-//            $("#university").val(usersArray[usersID]._University);
-//            $("#gradYear").val(usersArray[usersID]._GradDate);
-//            $("#goal1").val(usersArray[usersID]._CareerGoals);
-
-//            $("#myersBriggs").val(usersArray[usersID]._MyersBriggs);
-//            $("#hobby1").val(usersArray[usersID]._Hobbies);
-//            $("#constitutionId").val(usersArray[usersID]._AvailabilityTimes);
-//            $("#intelligenceId").val(usersArray[usersID]._AvailabilityType);
-//            $("#bio").val(usersArray[usersID]._Bio);
-//            //$("#charismaId").val(usersArray[usersID]._MentorFocus);
-//            //$("#hitPointsId").val(usersArray[usersID]._MentorFlag);
-
-
-
-//            var x = usersArray[usersID]._level
-
-
-
-//            //$("#name1").val(characterArray[0]._charName);
-//            //$("#class1").val(characterArray[0]._class);
-//            //$("#level1").val(characterArray[0]._level);
-
-//            //$("#name2").val(characterArray[1]._charName);
-//            //$("#class2").val(characterArray[1]._class);
-//            //$("#level2").val(characterArray[1]._level);
-
-//            //$("#name3").val(characterArray[2]._charName);
-//            //$("#class3").val(characterArray[2]._class);
-//            //$("#level3").val(characterArray[2]._level);
-
-//            //$("#name4").val(characterArray[3]._charName);
-//            //$("#class4").val(characterArray[3]._class);
-//            //$("#level4").val(characterArray[3]._level);
-
-//        }
-//    });
-//}
-
 
 //logs the user off both at the client and at the server
 function logOff() {
@@ -147,7 +81,7 @@ function logOff() {
                 //and clear the chat panel
                 //showPanel('logonPanel');
                 //HideMenu();
-                window.location.replace("index.html");
+                window.location.replace("loginPage.html");
                 console.log(msg.d);
             }
             else {
@@ -157,5 +91,204 @@ function logOff() {
             console.log("boo...");
         }
     });
+}
+
+usersArray = [];
+mentorsArray = [];
+connectionsPageDisplayArray = [];
+
+function importUsers(){
+    var webMethod = "ProjectServices.asmx/ImportUsers";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        //TODO: If I can fix this, fix it. Probably not good to be doing synchronous webcalls
+        async: false,
+        success: function (data) {
+            usersArray = data.d;
+            // make an array with only mentors to search from
+            mentorsArray = usersArray.filter(function (e) {
+                return e._MentorFlag;
+            });
+
+            // make the mentor list the first base display on the connections page
+            connectionsPageDisplayArray = mentorsArray
+        }
+    })
+}
+
+function postUser() {
+
+    importUsers();
+
+    var usersID = localStorage.getItem("UserId") - 1;
+
+    // mapping from webcall to html page
+    firstName = usersArray[usersID]._FirstName;
+    document.getElementById("fName").innerHTML = firstName;
+    lastName = usersArray[usersID]._LastName;
+    document.getElementById("lName").innerHTML = lastName;
+    welcome = usersArray[usersID]._FirstName;
+    document.getElementById("welcomeFname").innerHTML = welcome;
+    myers = usersArray[usersID]._MyersBriggs;
+    document.getElementById("myersBriggs").innerHTML = myers;
+    hobbies = usersArray[usersID]._Hobbies;
+    document.getElementById("hobby1").innerHTML = hobbies;
+    goals = usersArray[usersID]._CareerGoals;
+    document.getElementById("goal1").innerHTML = goals;
+    jobTitle = usersArray[usersID]._JobTitle;
+    document.getElementById("jobTitle").innerHTML = jobTitle;
+    department = usersArray[usersID]._Department;
+    document.getElementById("jobDept").innerHTML = department;
+    university = usersArray[usersID]._University;
+    document.getElementById("university").innerHTML = university;
+    gradDate = usersArray[usersID]._GradDate;
+    document.getElementById("gradYear").innerHTML = gradDate;
+    eduLevel = usersArray[usersID]._EdLevel;
+    document.getElementById("edLevel").innerHTML = eduLevel;
+    eduFocus = usersArray[usersID]._EdFocus;
+    document.getElementById("edFocus").innerHTML = eduFocus;
+    loc = usersArray[usersID]._Location;
+    document.getElementById("userLocation").innerHTML = loc;
+    // make sure there is two different locations job vs user location
+    jobLoc = usersArray[usersID]._Location;
+    document.getElementById("jobLocation").innerHTML = jobLoc;
+    availabilityType = usersArray[usersID]._AvailabilityType;
+    for (i = 0; i < availabilityType.length; i++) {
+        $("input[name='availType']").filter(function () {
+            return availabilityType[i].indexOf(this.value) != -1;
+        }).prop("checked", true);
+    }
+    availabilityTimes = usersArray[usersID]._AvailabilityTimes;
+    for (i = 0; i < availabilityTimes.length; i++) {
+        $("input[name='availTime']").filter(function () {
+            return availabilityTimes[i].indexOf(this.value) != -1;
+        }).prop("checked", true);
+    }
+}
+
+function initialPostConnection() {
+
+    //variables to determine which users we post to the page
+    var firstPostedUser = 0;
+    var lastPostedUser = 5;
+
+    importUsers();
+
+    localStorage.setItem("ConnectionPageNumber", 1);
+    firstPostedUser = 0;
+    var arrayIndex = firstPostedUser;
+    postConnection();
+
+}
+
+function postConnection(connectionsArray=mentorsArray) {
+
+    var arrayIndex = 0;
+    
+    // hides all spots, enabling posting loop to show them
+    for (let counter = 1; counter < 7; counter++) {
+        
+        profilePicID = "#profilePic" + counter;
+        fnameID = "#fName" + counter;
+        expertiseID = "#expertise" + counter;
+        jobTitleID = "#jobTitle" + counter;
+        locationID = "#location" + counter;
+
+        $(profilePicID).hide();
+        $(fnameID).hide();
+        $(expertiseID).hide();
+        $(jobTitleID).hide();
+        $(locationID).hide();
+    }
+    
+    for (let counter = 1; counter < connectionsArray.length + 1; counter++) {
+
+        // iterates across all of the users on the page
+        // maps all of first user, moves onto next
+        // counter = page counter
+        // arrayIndex = based on firstPosted User to accomodate for pages
+
+        // setting names of Ids
+        profilePicID = "#profilePic" + counter;
+        fnameID = "#fName" + counter;
+        expertiseID = "#expertise" + counter;
+        jobTitleID = "#jobTitle" + counter;
+        locationID = "#location" + counter;
+
+        console.log(fnameID);
+        console.log(expertiseID);
+        $(fnameID).text(connectionsArray[arrayIndex]._FirstName + " " + connectionsArray[arrayIndex]._LastName);
+        $(expertiseID).text(connectionsArray[arrayIndex]._EdFocus);
+        $(jobTitleID).text(connectionsArray[arrayIndex]._JobTitle);
+        $(locationID).text(connectionsArray[arrayIndex]._Location);
+        console.log(connectionsArray[arrayIndex]._FirstName);
+        arrayIndex++;
+        
+        $(profilePicID).show();
+        $(fnameID).show();
+        $(expertiseID).show();
+        $(jobTitleID).show();
+        $(locationID).show();
+        
+
+    }
+}
+
+function filterConnection() {
+    var filteredArray = [];
+
+    console.log($("#filterDropDown").val());
+    switch ($("#filterDropDown").val()) {
+        case "personality":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._MyersBriggs.toLowerCase().trim() === comparison.toLowerCase().trim();
+            })
+            console.log(filteredArray);
+            postConnection(filteredArray);
+            break;
+
+        case "availType":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._AvailabilityType.includes(comparison);
+            })
+            postConnection(filteredArray);
+            break;
+
+        case "availTime":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._AvailabilityTimes.includes(comparison);
+            })
+            postConnection(filteredArray);
+            break;
+
+        case "Location":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._Location.toLowerCase().trim() === comparison.toLowerCase().trim();
+            })
+            postConnection(filteredArray);
+            break;
+
+        case "Dept":
+            comparison = $("#filterText").val();
+            filteredArray = mentorsArray.filter(function (e) {
+                return e._Department.toLowerCase().trim() === comparison.toLowerCase().trim();
+            })
+            postConnection(filteredArray);
+            break;
+
+        default:
+            alert("Please Select a filter and try again")
+            break;
+    }
+
+        
+
 }
 
