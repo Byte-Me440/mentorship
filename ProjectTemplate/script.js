@@ -40,7 +40,7 @@ function logon() {
 
     var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
 
-
+    $("body").css("cursor", "progress");
     //jQuery ajax method
     $.ajax({
         type: "POST",
@@ -51,15 +51,17 @@ function logon() {
         success: function (msg) {
             var responseFromServer = msg.d;
             if (responseFromServer > 0) {
-                location.href = "homeProfile.html";
                 localStorage.setItem("UserId", responseFromServer);
+                location.href = "homeProfile.html";
             }
             else {
                 alert("Either Username or Password is Incorrect. Please try again.");
+                $("body").css("cursor", "default");
             }
         },
         error: function (e) {
             console.log("this code will only execute if javascript is unable to access the webservice");
+            $("body").css("cursor", "default");
         }
     });
 }
@@ -79,7 +81,7 @@ function logOff() {
                 //and clear the chat panel
                 //showPanel('logonPanel');
                 //HideMenu();
-                window.location.replace("index.html");
+                window.location.replace("loginPage.html");
                 console.log(msg.d);
             }
             else {
@@ -154,5 +156,44 @@ function postUser() {
         $("input[name='availTime']").filter(function () {
             return availabilityTimes[i].indexOf(this.value) != -1;
         }).prop("checked", true);
+    }
+}
+
+function postConnection() {
+
+    //variables to determine which users we post to the page
+    var firstPostedUser = 0;
+    var lastPostedUser = 5;
+
+    if (firstPostedUser == 0) {
+        importUsers();
+    }
+
+    console.log(usersArray);
+    console.log("hello");
+    localStorage.setItem("ConnectionPageNumber", 1);
+    firstPostedUser = 0;
+    arrayIndex = firstPostedUser;
+
+    // iterates across all of the users on the page
+    // maps all of first user, moves onto next
+    // counter = page counter
+    // arrayIndex = based on firstPosted User to accomodate for pages
+    for (let counter = 1; counter < 7; counter++){
+        // setting names of Ids
+        fnameID = "#fName" + counter;
+        expertiseID = "#expertise" + counter;
+        jobTitleID = "#jobTitle" + counter;
+        locationID = "#location" + counter;
+
+        console.log(fnameID);
+        console.log(expertiseID);
+        $(fnameID).text(usersArray[arrayIndex]._FirstName + " " + usersArray[arrayIndex]._LastName);
+        $(expertiseID).text(usersArray[arrayIndex]._EdFocus);
+        $(jobTitleID).text(usersArray[arrayIndex]._JobTitle);
+        $(locationID).text(usersArray[arrayIndex]._Location);
+        console.log(usersArray[arrayIndex]._FirstName);
+        console.log("loop is running: " + counter);
+        arrayIndex++;
     }
 }
