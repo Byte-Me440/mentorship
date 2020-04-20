@@ -89,7 +89,8 @@
             text-align: center;
             float: right;
             font-family: Georgia, serif;
-        }
+
+          }
 
         .pages {
             padding: 1.5em;
@@ -198,10 +199,10 @@
 
         <!-- top navigation to go to other pages, edit or log out -->
         <nav class="topNav">
-            <button onclick="window.location.href='connectionPage.html';">Create Connection</button>
-            <button>Messages</button>
-            <button>Edit</button>
-            <button onclick="logOff();">Log Out</button>
+            <button type="button" onclick="window.location.href = 'connectionPage.html';">Create Connection</button>
+            <button type="button" onclick="window.location.href = 'myConnections.html';">My Connections</button>
+            <button type="button" onclick="window.location.href = 'messagePage.html';">Messages</button>
+            <button onclick="logOff()">Log Out</button>
         </nav>
 
         <!-- left side of the page -->
@@ -271,17 +272,17 @@
 
 
                         <!--<div class="row">
-                            <div class="col-12">
-                                <p id="hobby2"></p>
-                            </div>
-                        </div>
+                    <div class="col-12">
+                        <p id="hobby2"></p>
+                    </div>
+                </div>
 
 
-                        <div class="row">
-                            <div class="col-12">
-                                <p id="hobby3"></p>
-                            </div>
-                        </div>-->
+                <div class="row">
+                    <div class="col-12">
+                        <p id="hobby3"></p>
+                    </div>
+                </div>-->
 
                         <br>
 
@@ -291,25 +292,25 @@
                                 <label class="topics">Career Goals:</label>
                             </div>
 
-                             <div class="col-9">
+                            <div class="col-9">
                                 <p id="goal1"></p>
-                             </div>
+                            </div>
 
                         </div>
 
 
                         <!--<div class="row">
-                            <div class="col-12">
-                                <p id="goal2"></p>
-                            </div>
-                        </div>
+                    <div class="col-12">
+                        <p id="goal2"></p>
+                    </div>
+                </div>
 
 
-                        <div class="row">
-                            <div class="col-12">
-                                <p id="goal3"></p>
-                            </div>
-                        </div>-->
+                <div class="row">
+                    <div class="col-12">
+                        <p id="goal3"></p>
+                    </div>
+                </div>-->
 
                         <br>
 
@@ -439,28 +440,28 @@
                         <div class="row">
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availEmail" value="Email" name="availType" disabled>
-                                    <label for="availEmail">Email</label>-->
+                            <label for="availEmail">Email</label>-->
                                 <input type="checkbox" id="phone" value="Phone" name="availType" disabled>
                                 <label for="phone">Phone</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                                    <label for="availPerson">In Person</label>-->
+                            <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="text" value="Text" name="availType" disabled>
                                 <label for="text">Text</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                                    <label for="availPerson">In Person</label>-->
+                            <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="internet" value="Internet" name="availType" disabled>
                                 <label for="internet">Internet</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                                    <label for="availPerson">In Person</label>-->
+                            <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="inPerson" value="In-Person" name="availType" disabled>
                                 <label for="inPerson">In-Person</label>
                             </div>
@@ -577,6 +578,12 @@
                     </a>
                 </section>
 
+            </div>
+
+            <br>
+
+            <div class="">
+                <button style="float:right;">Edit Profile</button>
             </div>
 
         </main>
