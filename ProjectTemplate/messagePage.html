@@ -112,23 +112,6 @@
             border-radius: 5px;
         }
 
-        nav a:link {
-            color: #ffffff;
-        }
-
-        nav a:visited {
-            color: #ffffff;
-        }
-
-        nav a:hover {
-            color: #00556a;
-            text-decoration: none;
-        }
-
-        nav a {
-            text-decoration: none;
-        }
-
         button {
             border-radius: 5px;
             background-color: #0084a5;
@@ -197,16 +180,18 @@
 </head>
 <body>
 
+    <!-- comment -->
     <div class="container">
 
         <br>
 
         <header>
-            <h1>Send A Message!</h1>
+            <h1 style="text-align:left;">Send A Message!</h1>
         </header>
 
         <main>
 
+            <!-- Navigation between pages/log out button -->
             <nav class="topNav">
                 <button type="button" onclick="window.location.href='homeProfile.html" ;>My Profile</button>
                 <button type="button" onclick="window.location.href='connectionPage.html" ;>Create Connection</button>
@@ -216,6 +201,7 @@
 
             <br>
 
+            <!-- To: -->
             <div class="row">
                 <div class="">
                     <h5 style="margin: 0px 20px 5px 20px" ;><label for="mentorEmail">To: </label></h5>
@@ -225,6 +211,7 @@
                 </div>
             </div>
 
+            <!-- CC: -->
             <div class="row">
                 <div class="">
                     <h5 style="margin: 0px 17px 5px 20px" ;><label for="menteeEmail">CC: </label></h5>
@@ -234,9 +221,10 @@
                 </div>
             </div>
 
+            <!-- Subject -->
             <div class="row">
                 <div class="">
-                    <h5 style="margin: 0px 17px 0px 20px" ;><label typf="text" for="subject">Subject: </label></h5>
+                    <h5 style="margin: 0px 17px 0px 20px" ;><label type="text" for="subject">Subject: </label></h5>
                 </div>
                 <div class="">
                     <input type="text" id="subject" size="80">
@@ -245,6 +233,7 @@
 
             <br>
 
+            <!-- Message Box -->
             <h5><label>Message:</label></h5>
 
             <div class="row">
@@ -255,6 +244,7 @@
 
             <br>
 
+            <!-- Send Button -->
             <div class="row">
                 <button type="submit">Send Message</button>
             </div>
