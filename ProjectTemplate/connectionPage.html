@@ -253,72 +253,66 @@
             <!-- comment -->
             <!-- top navigation to go to other pages, edit or log out -->
             <nav class="topNav">
-                <div class="row">
-                    <div class="col-3">
-                        <button>My Profile</button>
-                    </div>
-                    <div class="col-3">
-                        <button>Connections</button>
-                    </div>
-                    <div class="col-3">
-                        <button>Messages</button>
-                    </div>
-                    <div class="col-3">
-                        <button>Log Out</button>
-                    </div>
-                </div>
+                <button type="button" onclick="window.location.href='homeProfile.html" ;>My Profile</button>
+                <button type="button" onclick="window.location.href='myConnections.html" ;>My Connections</button>
+                <button type="button" onclick="window.location.href='messagePage.html" ;>Messages</button>
+                <button onclick="logOff()">Log Out</button>
             </nav>
 
             <br>
 
             <!-- Sort Drop Down -->
             <div class="">
-                <div class="row">
-                    <div class="col-2">
-                        <h5><label for="sort">Sort By:</label></h5>
+                <form action="" method="get" id="sortForm">
+                    <div class="row">
+                        <div class="">
+                            <h5 style="margin:0px 20px 5px 20px;"><label for="sort">Sort By:</label></h5>
+                        </div>
+                        <div class="">
+                            <select id="sort">
+                                <option diabled selected view>Select an Option</option>
+                                <option value="personality">Personality Type</option>
+                                <option value="availType">Availability Type</option>
+                                <option value="availTime">Availability Time</option>
+                                <option value="Location">Location</option>
+                                <option value="Dept">Job Department</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <select id="sort">
-                            <option diabled selected view>Select an Option</option>
-                            <option value="personality">Personality Type</option>
-                            <option value="availType">Availability Type</option>
-                            <option value="availTime">Availability Time</option>
-                            <option value="Location">Location</option>
-                            <option value="Dept">Job Department</option>
-                        </select>
-                    </div>
-                </div>
+                </form>
             </div>
-
 
             <!-- Filter Drop Down -->
             <div class="">
-                <div class="row">
-                    <div class="col-2">
-                        <h5><label for="filter">Filter By:</label></h5>
+                <form action="" method="get" id="filterForm">
+                    <div class="row">
+                        <div class="">
+                            <h5 style="margin:0px 15px 5px 15px;"><label for="filter">Filter By:</label></h5>
+                        </div>
+                        <div class="">
+                            <select style="margin:0px 15px 0px 0px;" id="filterDropDown">
+                                <option diabled selected view>Select an Option</option>
+                                <option value="personality">Personality Type</option>
+                                <option value="availType">Availability Type</option>
+                                <option value="availTime">Availability Time</option>
+                                <option value="Location">Location</option>
+                                <option value="Dept">Job Department</option>
+                            </select>
+                        </div>
+                        <div class="">
+                            <input type="text" id="filterText">
+                        </div>
+                        <div class="">
+                            <button type="submit" value="Submit" class="go-button">Go</button>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <select id="filterDropDown">
-                            <option diabled selected view>Select an Option</option>
-                            <option value="personality">Personality Type</option>
-                            <option value="availType">Availability Type</option>
-                            <option value="availTime">Availability Time</option>
-                            <option value="Location">Location</option>
-                            <option value="Dept">Job Department</option>
-                        </select>
-                    </div>
-                    <div class="col-2">
-                        <input type="text" id="filterText">
-                    </div>
-                    <div class="col-2">
-                        <button class="go-button">Go</button>
-                    </div>
-                </div>
+                </form>
             </div>
 
             <br>
             <br>
 
+            <!-- first row of results (3 profiles) -->
             <div class="box">
                 <div class="row">
                     <div class="col-4">
@@ -334,55 +328,56 @@
 
                 <div class="row profileContent">
                     <div class="col-4">
-                        <h4 id="fName1">Full Name</h4>
+                        <h4 id="fName1"></h4>
                     </div>
                     <div class="col-4">
-                        <h4 id="fName2">Full Name</h4>
+                        <h4 id="fName2"></h4>
                     </div>
                     <div class="col-4">
-                        <h4 id="fName3">Full Name</h4>
-                    </div>
-                </div>
-
-                <div class="row profileContent">
-                    <div class="col-4">
-                        <h5 id="expertise1">Mentor Expertise</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5 id="expertise2">Mentor Expertise</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5 id="expertise3">Mentor Expertise</h5>
+                        <h4 id="fName3"></h4>
                     </div>
                 </div>
 
                 <div class="row profileContent">
                     <div class="col-4">
-                        <h5 id="jobTitle1">Job Title</h5>
+                        <h5 id="expertise1"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="jobTitle2">Job Title</h5>
+                        <h5 id="expertise2"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="jobTitle3">Job Title</h5>
+                        <h5 id="expertise3"></h5>
                     </div>
                 </div>
 
                 <div class="row profileContent">
                     <div class="col-4">
-                        <h5 id="location1">Location</h5>
+                        <h5 id="jobTitle1"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="location2">Location</h5>
+                        <h5 id="jobTitle2"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="location3">Location</h5>
+                        <h5 id="jobTitle3"></h5>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="location1"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location2"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location3"></h5>
                     </div>
                 </div>
             </div>
 
             <br>
 
+            <!-- second row of results (3 profiles) -->
             <div class="box">
                 <div class="row">
                     <div class="col-4">
@@ -398,55 +393,56 @@
 
                 <div class="row profileContent">
                     <div class="col-4">
-                        <h4 id="fName4">Full Name</h4>
+                        <h4 id="fName4"></h4>
                     </div>
                     <div class="col-4">
-                        <h4 id="fName5">Full Name</h4>
+                        <h4 id="fName5"></h4>
                     </div>
                     <div class="col-4">
-                        <h4 id="fName6">Full Name</h4>
-                    </div>
-                </div>
-
-                <div class="row profileContent">
-                    <div class="col-4">
-                        <h5 id="expertise4">Mentor Expertise</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5 id="expertise5">Mentor Expertise</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5 id="expertise6">Mentor Expertise</h5>
+                        <h4 id="fName6"></h4>
                     </div>
                 </div>
 
                 <div class="row profileContent">
                     <div class="col-4">
-                        <h5 id="jobTitle4">Job Title</h5>
+                        <h5 id="expertise4"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="jobTitle5">Job Title</h5>
+                        <h5 id="expertise5"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="jobTitle6">Job Title</h5>
+                        <h5 id="expertise6"></h5>
                     </div>
                 </div>
 
                 <div class="row profileContent">
                     <div class="col-4">
-                        <h5 id="location4">Location</h5>
+                        <h5 id="jobTitle4"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="location5">Location</h5>
+                        <h5 id="jobTitle5"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 id="location6">Location</h5>
+                        <h5 id="jobTitle6"></h5>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="location4"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location5"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location6"></h5>
                     </div>
                 </div>
             </div>
 
             <br>
 
+            <!-- page navigation -->
             <div class="pagination">
                 <a href="#">&laquo;</a>
                 <a href="#">1</a>
