@@ -13,6 +13,20 @@
             initialPostConnection();
         });
     </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('.SendEmail').click(function (event) {
+                var email = 'jdominguez466@gmail.com';
+                var subject = 'Initial Connection';
+                var emailBody = 'Dear Mentor,';
+                document.location = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody;
+            });
+        });
+
+    </script>
+
     <style type="text/css">
 
 
@@ -204,7 +218,7 @@
         }
 
         .right {
-            float:right;
+            float: right;
             text-align: center;
             margin-right: 30px;
         }
@@ -220,27 +234,27 @@
         }
 
         .pagination {
-              display:flex;
-              justify-content:center;
-              align-items:center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .pagination a {
-            color: black;
-            float: left;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
 
-         .pagination a.active {
-             background-color: #4CAF50;
-             color: white;
-         }
+                .pagination a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
 
-         .pagination a:hover:not(.active) {
-             background-color: #ddd;
-             border-radius: 5px;
-         }
+                .pagination a:hover:not(.active) {
+                    background-color: #ddd;
+                    border-radius: 5px;
+                }
     </style>
 
 </head>
@@ -462,6 +476,8 @@
                 <a>2</a>
                 <a>3</a>
                 <a>&raquo;</a>
+
+                <button class="SendEmail">Send Email</button>
             </div>
 
         </main>
