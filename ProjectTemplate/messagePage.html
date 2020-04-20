@@ -21,6 +21,7 @@
             border-radius: 10px;
             box-shadow: 15px 20px 0px rgba(0,0,0,0.1);
             background: #fff;
+            text-align: center;
         }
 
         main {
@@ -169,10 +170,11 @@
 
         textarea {
             height: 400px;
-            width: 800px;
+            width: 750px;
             overflow-y: scroll;
             overflow-x: scroll;
             margin: 0 auto;
+            resize: none;
         }
 
         .input {
@@ -243,9 +245,11 @@
 
             <br>
 
+            <h5><label>Message:</label></h5>
+
             <div class="row">
                 <div class="col-12">
-                    <textarea id="emailContent"></textarea>
+                    <textarea name="message" id="emailContent"></textarea>
                 </div>
             </div>
 
