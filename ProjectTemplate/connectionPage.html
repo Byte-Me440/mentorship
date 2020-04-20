@@ -235,6 +235,9 @@
              background-color: #ddd;
              border-radius: 5px;
          }
+
+         .search {
+         }
     </style>
 
 </head>
@@ -245,7 +248,21 @@
         <br>
 
         <header>
-            <h1>Make A Connection!</h1>
+            <div class="row search">
+                <div class="col-7">
+                    <h1>Make A Connection!</h1>
+                </div>
+                <div class="col-1">
+                    <h5 style="margin: 20px 0;"><label>Search:</label></h5>
+                </div>
+                <div class="col-2">
+                    <input style="margin: 15px 0;" type="text" id="searchBar" size="17">
+                </div>
+                <div class="col-2">
+                    <button type="submit" style="margin: 15px 0;" class="go-button">Go</button>
+                </div>
+            </div>
+            
         </header>
 
         <main>
@@ -253,37 +270,23 @@
             <!-- comment -->
             <!-- top navigation to go to other pages, edit or log out -->
             <nav class="topNav">
-                <button type="button" onclick="window.location.href = 'homeProfile.html';">My Profile</button>
-                <button type="button" onclick="window.location.href = 'myConnections.html';">My Connections</button>
-                <button type="button" onclick="window.location.href = 'messagePage.html';">Messages</button>
-                <button onclick="logOff()">Log Out</button>
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" onclick="window.location.href = 'homeProfile.html';">My Profile</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" onclick="window.location.href = 'myConnections.html';">My Connections</button>
+                    </div>
+                    <div class="col-4">
+                        <button onclick="logOff()">Log Out</button>
+                    </div>
+                </div>
             </nav>
 
             <br>
 
-            <!-- Sort Drop Down -->
-            <div class="">
-                <form action="" method="get" id="sortForm">
-                    <div class="row">
-                        <div class="">
-                            <h5 style="margin:0px 20px 5px 20px;"><label for="sort">Sort By:</label></h5>
-                        </div>
-                        <div class="">
-                            <select id="sort">
-                                <option diabled selected view>Select an Option</option>
-                                <option value="personality">Personality Type</option>
-                                <option value="availType">Availability Type</option>
-                                <option value="availTime">Availability Time</option>
-                                <option value="Location">Location</option>
-                                <option value="Dept">Job Department</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
             <!-- Filter Drop Down -->
-            <div class="">
+            <div class="right">
                 <form action="" method="get" id="filterForm">
                     <div class="row">
                         <div class="">
@@ -438,20 +441,6 @@
                         <h5 id="location6"></h5>
                     </div>
                 </div>
-            </div>
-
-            <br>
-
-            <!-- page navigation -->
-            <div class="pagination">
-                <a href="#">&laquo;</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">&raquo;</a>
             </div>
 
         </main>
