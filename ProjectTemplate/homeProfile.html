@@ -177,7 +177,8 @@
             text-align: center;
             float: right;
             font-family: Georgia, serif;
-        }
+
+          }
 
         .pages {
             padding: 1.5em;
@@ -286,11 +287,10 @@
 
         <!-- top navigation to go to other pages, edit or log out -->
         <nav class="topNav">
-            <button><a href="connectionPage.html">Create Connection</a></button>
-            <button><a href="myConnections.html">My Connections</a></button>
-            <button>Messages</button>
-            <button>Edit</button>
-            <button>Log Out</button>
+            <button type="button" onclick="window.location.href='connectionPage.html";>Create Connection</button>
+            <button type="button" onclick="window.location.href='myConnections.html";>My Connections</button>
+            <button type="button" onclick="window.location.href='messagePage.html";>Messages</button>
+            <button onclick="logOff()">Log Out</button>
         </nav>
 
         <!-- left side of the page -->
