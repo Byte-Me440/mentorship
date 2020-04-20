@@ -171,6 +171,7 @@
             height: 400px;
             width: 800px;
             overflow-y: scroll;
+            overflow-x: scroll;
             margin: 0 auto;
         }
 
@@ -205,46 +206,37 @@
         <main>
 
             <nav class="topNav">
-                <div class="row">
-                    <div class="col-3">
-                        <button>My Profile</button>
-                    </div>
-                    <div class="col-3">
-                        <button>Create Connection</button>
-                    </div>
-                    <div class="col-3">
-                        <button>Connections</button>
-                    </div>
-                    <div class="col-3">
-                        <button>Log Out</button>
-                    </div>
-                </div>
+                <button type="button" onclick="window.location.href='homeProfile.html" ;>My Profile</button>
+                <button type="button" onclick="window.location.href='connectionPage.html" ;>Create Connection</button>
+                <button type="button" onclick="window.location.href='myConnections.html" ;>My Connections</button>
+                <button onclick="logOff()">Log Out</button>
             </nav>
 
             <br>
 
             <div class="row">
-                <div class="col-1">
-                    <h5><label for="mentorEmail">To: </label></h5>
+                <div class="">
+                    <h5 style="margin: 0px 20px 5px 20px" ;><label for="mentorEmail">To: </label></h5>
                 </div>
-                <div class="col-5">
+                <div class="">
                     <input type="email" id="mentorEmail" placeholder="Mentor Email" size="40">
                 </div>
-                <div class="col-1">
-                    <h5><label for="menteeEmail">CC: </label></h5>
+            </div>
+
+            <div class="row">
+                <div class="">
+                    <h5 style="margin: 0px 17px 5px 20px" ;><label for="menteeEmail">CC: </label></h5>
                 </div>
-                <div class="col-5">
+                <div class="">
                     <input type="email" id="menteeEmail" placeholder="Mentee Email" size="40">
                 </div>
             </div>
 
-            <br>
-
             <div class="row">
-                <div class="col-1">
-                    <h5><label typeof="text" for="subject">Subject: </label></h5>
+                <div class="">
+                    <h5 style="margin: 0px 17px 0px 20px" ;><label typf="text" for="subject">Subject: </label></h5>
                 </div>
-                <div class="col-9">
+                <div class="">
                     <input type="text" id="subject" size="80">
                 </div>
             </div>
@@ -260,9 +252,7 @@
             <br>
 
             <div class="row">
-                <div class="col-12">
-                    <button>Send</button>
-                </div>
+                <button type="submit">Send Message</button>
             </div>
 
 
