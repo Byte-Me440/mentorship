@@ -387,5 +387,46 @@ namespace ProjectTemplate
             }
 
         }
+
+
+        [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
+        public Connection[] PairedUsers()
+        {
+            string sqlConnectString = getConString();
+            //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
+            //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session
+            //string sqlSelect = "SELECT id, admin FROM accounts WHERE userid=@idValue and pass=@passValue";
+            string sqlSelect = "SELECT * from Paired";
+
+            //set up our connection object to be ready to use our connection string
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            //set up our command object to use our connection, and our query
+            MySqlCommand sqlImportUsersCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            //a data adapter acts like a bridge between our command object and
+            //the data we are trying to get back and put in a table object
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlImportUsersCommand);
+            //here's the table we want to fill with the results from our query
+            DataTable sqlDt = new DataTable();
+            //here we go filling it!
+            sqlDa.Fill(sqlDt);
+            //check to see if any rows were returned.  If they were, it means it's
+            //a legit account
+
+            List<Connection> paired = new List<Connection>();
+            for (int i = 0; i < sqlDt.Rows.Count; i++)
+            {
+                paired.Add(new Connection
+                {
+                    _MenteeId = sqlDt.Rows[i]["MenteeId"].ToString(),
+                    _MentorId = sqlDt.Rows[i]["MentorId"].ToString().Split(',')
+                });
+            }
+            //convert the list of accounts to an array and return!
+            return paired.ToArray();
+        }
+
+
+
     }
 }
