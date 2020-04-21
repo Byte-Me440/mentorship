@@ -45,6 +45,8 @@
                     $("#fName").val(usersArray[usersID]._FirstName);
                     $("#lName").val(usersArray[usersID]._LastName);
                     $("#welcomeFname").val(usersArray[usersID]._FirstName);
+                    $("#userEmail").val(usersArray[usersID]._Email);
+
 
                     $("#myersBriggs").val(usersArray[usersID]._MyersBriggs);
                     $("#hobby1").val(usersArray[usersID]._Hobbies);
@@ -122,6 +124,7 @@
             var lName = document.getElementById("lName").value;
 
             var bio = document.getElementById("bio").value;
+            var email = document.getElementById("userEmail").value;
 
             var myersBriggs = document.getElementById("myersBriggs").value;
             var hobby1 = document.getElementById("hobby1").value;
@@ -140,6 +143,7 @@
             console.log(fName);
             console.log(lName);
             console.log(bio);
+            console.log(email);
             console.log(myersBriggs);
             console.log(hobby1);
             console.log(goal1);
@@ -160,12 +164,13 @@
             // dont forget to grab all the checkbox data and place in an array to insert back into the database
 
             //var webMethod = "ProjectServices.asmx/UpdateUser";
-            var webMethod = "ProjectServices.asmx/UpdateAccount";
+            var webMethod = "ProjectServices.asmx/UpdateUser";
 
 
             var parameters = "{\"FirstName\":\"" + encodeURI(fName)
                 + "\", \"LastName\":\"" + encodeURI(lName)
                 + "\", \"Bio\":\"" + encodeURI(bio)
+                + "\", \"Email\":\"" + encodeURI(email)
                 + "\", \"MyersBriggs\":\"" + encodeURI(myersBriggs)
                 + "\", \"Hobbies\":\"" + encodeURI(hobby1)
                 + "\", \"CareerGoals\":\"" + encodeURI(goal1)
@@ -434,10 +439,24 @@
                         <textarea class="col-11" id="bio" style="height: 100px; text-align:left;"></textarea>
                     </div>
 
+                    <br>
 
+                    <!-- Email -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label class="topics">Email:</label>
+                        </div>
+                        <div class="col-10">
 
+                            <input type="text" id="userEmail" style="text-align: center;">
+
+                        </div>
+                    </div>
 
                     <br>
+
+
+
 
                     <!-- Myers Briggs -->
                     <div class="row">
@@ -611,28 +630,28 @@
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availEmail" value="Email" name="availType" disabled>
                                 <label for="availEmail">Email</label>-->
-                                <input type="checkbox" id="phone" value="Phone" name="availType" disabled>
+                                <input type="checkbox" id="phone" value="Phone" name="availType">
                                 <label for="phone">Phone</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
                                 <label for="availPerson">In Person</label>-->
-                                <input type="checkbox" id="text" value="Text" name="availType" disabled>
+                                <input type="checkbox" id="text" value="Text" name="availType">
                                 <label for="text">Text</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
                                 <label for="availPerson">In Person</label>-->
-                                <input type="checkbox" id="internet" value="Internet" name="availType" disabled>
+                                <input type="checkbox" id="internet" value="Internet" name="availType">
                                 <label for="internet">Internet</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
                                 <label for="availPerson">In Person</label>-->
-                                <input type="checkbox" id="inPerson" value="In-Person" name="availType" disabled>
+                                <input type="checkbox" id="inPerson" value="In-Person" name="availType">
                                 <label for="inPerson">In-Person</label>
                             </div>
                         </div>
@@ -655,15 +674,15 @@
                                 <label for="mon">Monday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="monMorning" name="availTime" value="MM" disabled>
+                                <input type="checkbox" id="monMorning" name="availTime" value="MM">
                                 <label for="monMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="monAfternoon" name="availTime" value="MA" disabled>
+                                <input type="checkbox" id="monAfternoon" name="availTime" value="MA">
                                 <label for="monAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="monEvening" name="availTime" value="ME" disabled>
+                                <input type="checkbox" id="monEvening" name="availTime" value="ME">
                                 <label for="monEvening">Evening</label>
                             </div>
                         </div>
@@ -674,15 +693,15 @@
                                 <label for="tues">Tuesday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="tuesMorning" name="availTime" value="TM" disabled>
+                                <input type="checkbox" id="tuesMorning" name="availTime" value="TM">
                                 <label for="tuesMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="tuesAfternoon" name="availTime" value="TA" disabled>
+                                <input type="checkbox" id="tuesAfternoon" name="availTime" value="TA">
                                 <label for="tuesAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="tuesEvening" name="availTime" value="TE" disabled>
+                                <input type="checkbox" id="tuesEvening" name="availTime" value="TE">
                                 <label for="tuesEvening">Evening</label>
                             </div>
                         </div>
@@ -693,15 +712,15 @@
                                 <label for="wed">Wednesday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="wedMorning" name="availTime" value="WM" disabled>
+                                <input type="checkbox" id="wedMorning" name="availTime" value="WM">
                                 <label for="wedMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="wedAfternoon" name="availTime" value="WA" disabled>
+                                <input type="checkbox" id="wedAfternoon" name="availTime" value="WA">
                                 <label for="wedAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="wedEvening" name="availTime" value="WE" disabled>
+                                <input type="checkbox" id="wedEvening" name="availTime" value="WE">
                                 <label for="wedEvening">Evening</label>
                             </div>
                         </div>
@@ -712,15 +731,15 @@
                                 <label for="thur">Thursday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="thurMorning" name="availTime" value="THM" disabled>
+                                <input type="checkbox" id="thurMorning" name="availTime" value="THM">
                                 <label for="thurMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="thurAfternoon" name="availTime" value="THA" disabled>
+                                <input type="checkbox" id="thurAfternoon" name="availTime" value="THA">
                                 <label for="thurAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="thurEvening" name="availTime" value="THE" disabled>
+                                <input type="checkbox" id="thurEvening" name="availTime" value="THE">
                                 <label for="thurEvening">Evening</label>
                             </div>
                         </div>
@@ -731,15 +750,15 @@
                                 <label for="fri">Friday</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="friMorning" name="availTime" value="FM" disabled>
+                                <input type="checkbox" id="friMorning" name="availTime" value="FM">
                                 <label for="friMorning">Morning</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="friAfternoon" name="availTime" value="FA" disabled>
+                                <input type="checkbox" id="friAfternoon" name="availTime" value="FA">
                                 <label for="friAfternoon">Afternoon</label>
                             </div>
                             <div class="col-3">
-                                <input type="checkbox" id="friEvening" name="availTime" value="FE" disabled>
+                                <input type="checkbox" id="friEvening" name="availTime" value="FE">
                                 <label for="friEvening">Evening</label>
                             </div>
                         </div>

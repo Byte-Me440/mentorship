@@ -357,7 +357,7 @@ namespace ProjectTemplate
 
         //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
         [WebMethod(EnableSession = true)]
-        public String UpdateUser(string fName, string lName, string bio, string myersBriggs, string hobby, string goal, string jobTitle, string JobDept, string university, string gradYear, string edLevel, string edFocus, string userLocation, string availTime, string availType)
+        public String UpdateUser(string fName, string lName, string email, string bio, string myersBriggs, string hobby, string goal, string jobTitle, string JobDept, string university, string gradYear, string edLevel, string edFocus, string userLocation, string availTime, string availType)
         {
             string sqlConnectString = getConString();
 
@@ -366,6 +366,7 @@ namespace ProjectTemplate
                 "UPDATE byteme.USERS SET " +
                 "FirstName=@fName, " +
                 "LastName=@lName, " +
+                "Email= @Email, " +
                 "Bio=@bio, " +
                 "MyersBriggs=@myers, " +
                 "Hobbies=@hobbies, " +
@@ -391,6 +392,7 @@ namespace ProjectTemplate
             sqlCommand.Parameters.AddWithValue("@UserId", Session["UserId"]);
             sqlCommand.Parameters.AddWithValue("@fName", HttpUtility.UrlDecode(fName));
             sqlCommand.Parameters.AddWithValue("@lName", HttpUtility.UrlDecode(lName));
+            sqlCommand.Parameters.AddWithValue("@Email", HttpUtility.UrlDecode(email));
             sqlCommand.Parameters.AddWithValue("@bio", HttpUtility.UrlDecode(bio));
             sqlCommand.Parameters.AddWithValue("@myers", HttpUtility.UrlDecode(myersBriggs));
             sqlCommand.Parameters.AddWithValue("@hobbies", HttpUtility.UrlDecode(hobby));
