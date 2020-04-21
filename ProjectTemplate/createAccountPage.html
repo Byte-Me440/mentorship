@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  
+    <style type="text/css">
+      body{
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,142,174,1) 35%, rgba(0,212,255,1) 100%);
+      width:100%;
+      padding: 100px;
+      }
+
+     /* .loginBox{
+        width:100%;
+        padding: 100px;
+      }*/
+
+      /*.loginPic{
+        background-image: url('loginpic.jpg');
+        background-repeat: no-repeat left bottom;
+        no-repeat left bottom; 
+        background-size:cover; 
+        border-radius: 10px 10px;
+        padding:0; 
+        min-height:500px; 
+      }*/
+      
+      .container{
+        border-radius: 10px; 
+        box-shadow:15px 20px 0px rgba(0,0,0,0.1);
+        background:#fff; 
+      }
+      
+      
+      .signupTitle{
+        position:relative;
+        padding: 50px 30px; 
+      }
+      
+      .signupTitle h2{
+        font-size:30px; 
+        font-weight:800; 
+        color: #DE6262;
+        margin-bottom:30px; 
+        text-decoration: underline;
+
+      }
+      
+     /* .signupTitle h2:after{ 
+        width:500px; 
+        height:5px; 
+        content:" ";
+        display:block;
+        background:#0084a5;  
+        margin-top:20px;  
+        margin-left:auto;
+        margin-right:auto
+        border-radius:3px;
+      }*/
+      
+      .login_button{ 
+        color:#fff; 
+        background: #0084a5;
+        font-weight:600;
+      }
+
+      .loginTitle{
+        color: blue;
+      }
+
+      .signUp{
+        padding-top: 10px;
+        /*clear: both;*/
+        float: left;
+      }
+
+    </style>
+
+</head>
+<body>
+
+  <div class="container">
+    <form class="signUp-form">
+      <div class="row">
+        <div class="col-md-12 signupTitle">
+          <h2 class="text-center loginTitle" style="color: #0084a5;">Mentorship Sign Up</h2>
+        </div>
+      </div>
+            
+        <div class="row">
+          <div class="col-4">
+            <label class="text-uppercase name" style="color: black;">First Name:</label>
+            <input type="text" class="form-control" id="firstNameId" placeholder="">
+          </div>
+
+          <div class="col-4">
+            <label class="text-uppercase name" style="color: black;">Last Name:</label>
+            <input type="text" class="form-control" id="lastNameId" placeholder="">
+          </div>
+
+          <div class="col-4">
+            <label class="text-uppercase email" style="color: black;">Email:</label>
+            <input type="text" class="form-control" id="emailId" placeholder="">
+          </div>
+
+          <!-- <div class="col-4">
+            <label class="text-uppercase job" style="color: black;">Job:</label>
+            <input type="text" class="form-control" id="jobId" placeholder="">
+          </div> -->
+        </div>
+
+
+        <div class="row" style="margin-top: 20px;">
+
+          <div class="col-4">
+            <label class="text-uppercase username" style="color: black;">Username:</label>
+            <input type="text" class="form-control" id="userId" placeholder="">
+          </div>
+
+          <div class="col-4">
+            <label class="text-uppercase Password" style="color: black;">Password:</label>
+            <input type="password" class="form-control" id="passId" placeholder="">
+          </div>
+
+          <div class="col-4">
+            <label class="text-uppercase account" style="color: black;">Account Type:</label>
+            <br/>
+            <!-- <input type="checkbox" name="accountType" value="Mentee" style="margin-top: 10px;">
+            <label>Mentee</label>
+
+            <input type="checkbox" name="accountType" value="Mentor" style="margin-left: 10px; margin-top: 10px;">
+            <label>Mentor</label> -->
+
+            <input type="radio" id="mentee" name="accountType" value="mentee" style="margin-top: 10px;">
+            <label for="mentee">Mentee</label>
+            <input type="radio" id="mentor" name="accountType" value="mentor" style="margin-left: 10px; margin-top: 10px;">
+            <label for="mentor">Mentor</label><br>  
+
+          </div>
+          <!-- <div class="col-4">
+            <label class="text-uppercase department" style="color: black;">Department:</label>
+            <input type="text" class="form-control" id="departmentId" placeholder="">
+          </div>
+
+          <div class="col-4">
+            <label class="text-uppercase linkedinUrl" style="color: black;">Linkedin Url:</label>
+            <input type="text" class="form-control" id="emailId" placeholder="">
+          </div>
+
+          <div class="col-4">
+            <label class="text-uppercase personality" style="color: black;">personality: <a href="https://www.16personalities.com/free-personality-test"> (Pers. Test)</a></label>
+            <input type="text" class="form-control" id="jobId" placeholder="Click link above to take personality test">
+          </div> -->
+        </div>
+
+    </form>
+
+    <div class="row" style="margin-top: 30px; margin-bottom: 20px; padding-bottom: 20px; align-self: right;">
+          <div class="col-6">
+          <!-- add a link to take you to the sign up page -->
+              <p>Created Your Account? <a href="loginPage.html" target="_self" style="color: #00BFFF; justify-content: center;"> LOGIN IN</a> <p>
+          </div>
+
+          <div class="col-6">
+            <!-- missing the onclick  -->
+            <button type="button" class="btn login_button float-right" style="color: white; width: 200px;">Sign Up</button>
+          </div>
+        </div>
+       
+    
+  </div>
+
+
+</body>
+</html>

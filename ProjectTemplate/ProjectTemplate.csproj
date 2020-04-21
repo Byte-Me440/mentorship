@@ -1,4 +1,4 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -88,17 +88,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="createAccountPage.html" />
     <Content Include="Global.asax" />
-    <Content Include="index.html" />
+    <Content Include="loginPage.html" />
+    <Content Include="loginpic.jpg" />
     <Content Include="ProjectServices.asmx" />
     <Content Include="script.js" />
     <Content Include="style.css" />
     <Content Include="Web.config" />
+    <Content Include="homeProfile.html" />
     <Content Include="connectionPage.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Mentee.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Mentor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -141,8 +144,7 @@
           <IISUrl>http://localhost:50287/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl />
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
