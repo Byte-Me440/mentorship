@@ -288,6 +288,11 @@ function filterConnection() {
             break;
     }
 
+    function openUser(id) {
+        localStorage.setItem('UserId', id);
+        window.location.href = 'homeProfile.html';
+    }
+
         
 
 }
