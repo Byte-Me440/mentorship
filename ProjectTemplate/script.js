@@ -189,6 +189,8 @@ function postUser() {
         document.getElementById("welcomeFname").innerHTML = welcome;
         myers = profile[0]._MyersBriggs;
         document.getElementById("myersBriggs").innerHTML = myers;
+        email = profile[0]._Email;
+        document.getElementById("userEmail").innerHTML = email;
         hobbies = profile[0]._Hobbies;
         document.getElementById("hobby1").innerHTML = hobbies;
         goals = profile[0]._CareerGoals;
