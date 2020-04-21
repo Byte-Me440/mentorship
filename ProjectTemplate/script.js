@@ -123,7 +123,6 @@ function importUsers(){
 function postUser() {
 
     importUsers();
-
     let usersID = localStorage.getItem("UserId") - 1;
     let profileLookup = localStorage.getItem("ProfileID");
     console.log(profileLookup);
