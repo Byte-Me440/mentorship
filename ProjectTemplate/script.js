@@ -187,23 +187,25 @@ function initialPostConnection() {
 function postConnection(connectionsArray=mentorsArray) {
 
     var arrayIndex = 0;
-    
+
     // hides all spots, enabling posting loop to show them
     for (let counter = 1; counter < 7; counter++) {
-        
+
+        buttonID = "#button" + counter;
         profilePicID = "#profilePic" + counter;
         fnameID = "#fName" + counter;
         expertiseID = "#expertise" + counter;
         jobTitleID = "#jobTitle" + counter;
         locationID = "#location" + counter;
 
+        $(buttonID).hide();
         $(profilePicID).hide();
         $(fnameID).hide();
         $(expertiseID).hide();
         $(jobTitleID).hide();
         $(locationID).hide();
     }
-    
+
     for (let counter = 1; counter < connectionsArray.length + 1; counter++) {
 
         // iterates across all of the users on the page
@@ -226,13 +228,13 @@ function postConnection(connectionsArray=mentorsArray) {
         $(locationID).text(connectionsArray[arrayIndex]._Location);
         console.log(connectionsArray[arrayIndex]._FirstName);
         arrayIndex++;
-        
+
         $(profilePicID).show();
         $(fnameID).show();
         $(expertiseID).show();
         $(jobTitleID).show();
         $(locationID).show();
-        
+
 
     }
 }
@@ -287,7 +289,5 @@ function filterConnection() {
             alert("Please Select a filter and try again")
             break;
     }
-        
-
 }
 
