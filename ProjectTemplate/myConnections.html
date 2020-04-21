@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title id="title">My Connections</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script>$(document).ready(function () {
+            function();
+        });</script>
+
+    <style type="text/css">
+
+
+        body {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,142,174,1) 35%, rgba(0,212,255,1) 100%);
+            width: 100%;
+            padding: 100px;
+        }
+
+        .container {
+            border-radius: 10px;
+            box-shadow: 15px 20px 0px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+
+        main {
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 30px;
+            display: block;
+            background-color: #FFFFFF;
+            overflow: auto;
+            clear: right;
+            font-family: Georgia, serif;
+        }
+
+        header {
+            border-radius: 5px;
+            background-color: #D3D3D3;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            margin-top: 5px;
+            font-family: Georgia, serif;
+            letter-spacing: 0.15em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 0.5em;
+            text-shadow: 1.5px 1.5px #808080;
+        }
+
+        h2 {
+            border-radius: 5px;
+            margin-bottom: 0;
+            margin-top: 0;
+            font-family: Georgia, serif;
+            letter-spacing: 0.25em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            text-align: center;
+            background-color: #D3D3D3;
+        }
+
+        h3 {
+            color: #0084a5;
+            font-family: Georgia, serif;
+            text-shadow: 1.5px 1.5px #CCCCCC;
+        }
+
+        h4 {
+            font-family: Georgia, serif;
+        }
+
+        h5 {
+            font-family: Georgia, serif;
+        }
+
+        .topNav {
+            border-radius: 5px;
+            border-width: 1px 0;
+            padding: 0.5em;
+            background-color: #ffffff;
+            text-align: center;
+            font-family: Georgia, serif;
+        }
+
+        .pages {
+            padding: 1.5em;
+            font-size: 100%;
+            float: left;
+            clear: both;
+            font-family: Georgia, serif;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        nav li {
+            border-bottom: 1px solid #000033;
+            background-color: #0084a5;
+            padding: 8px;
+            margin-bottom: 2px;
+            width: 180px;
+            border-radius: 5px;
+        }
+
+        nav a:link {
+            color: #ffffff;
+        }
+
+        nav a:visited {
+            color: #ffffff;
+        }
+
+        nav a:hover {
+            color: #00556a;
+            text-decoration: none;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        button {
+            border-radius: 5px;
+            background-color: #0084a5;
+            border: none;
+            color: white;
+            padding: 15px 44px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            margin: 2px 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .go-button {
+            border-radius: 5px;
+            background-color: #0084a5;
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 12px;
+            margin: 2px 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .contents {
+            overflow-y: scroll;
+            height: 600px;
+            width: auto;
+            resize: none; /* Remove this if you want the user to resize the textarea */
+        }
+
+        .profile-box {
+            width: 220px;
+            float: left;
+            text-align: center;
+            clear: both;
+        }
+
+        .profile-pic {
+            height: 130px;
+            width: 150px;
+            background-image: url('profile_img.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            display: block;
+            margin: 0 auto;
+            /*text-align: center;
+            margin-left: 20px;
+            margin-right: 20px;*/
+        }
+
+        textarea {
+            height: 600px;
+            width: 600px;
+        }
+
+        .input {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .topics {
+            font-weight: bold;
+        }
+
+        .right {
+            float: right;
+            text-align: center;
+            margin-right: 30px;
+        }
+
+        .box {
+            /*text-align: center;*/
+            /*margin-left:20px;
+            margin-right:20px;*/
+        }
+
+        .profileContent {
+            text-align: center;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+
+                .pagination a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+                .pagination a:hover:not(.active) {
+                    background-color: #ddd;
+                    border-radius: 5px;
+                }
+
+        .view-button {
+            border-radius: 5px;
+            background-color: #D3D3D3;
+            border: none;
+            color: black;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 12px;
+            margin: 2px 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <br>
+
+        <header>
+            <div class="row search">
+                <div class="col-7">
+                    <h1 id="topHeading">My Connections</h1>
+                </div>
+                <div class="col-1">
+                    <h5 style="margin: 20px 0;"><label>Search:</label></h5>
+                </div>
+                <div class="col-2">
+                    <input style="margin: 15px 0;" type="text" id="searchBar" size="17">
+                </div>
+                <div class="col-2">
+                    <button type="submit" style="margin: 15px 0;" class="go-button">Go</button>
+                </div>
+            </div>
+
+        </header>
+
+        <main>
+
+            <!-- comment -->
+            <!-- top navigation to go to other pages, edit or log out -->
+            <nav class="topNav">
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" onclick="window.location.href = 'homeProfile.html';">My Profile</button>
+                    </div>
+                    <div class="col-4">
+                        <button id="myConnectionsBtn" type="button" onclick="window.location.href = 'connectionPage.html';">Make Connection</button>
+                    </div>
+                    <div class="col-4">
+                        <button onclick="logOff()">Log Out</button>
+                    </div>
+                </div>
+            </nav>
+
+            <br>
+
+            <!-- Filter Drop Down -->
+            <div class="right">
+                <div class="row">
+                    <div class="">
+                        <h5 style="margin:0px 15px 5px 15px;"><label for="filter">Filter By:</label></h5>
+                    </div>
+                    <div class="">
+                        <select style="margin:0px 15px 0px 0px;" id="filterDropDown">
+                            <option diabled selected view>Select an Option</option>
+                            <option value="personality">Personality Type</option>
+                            <option value="availType">Availability Type</option>
+                            <option value="availTime">Availability Time</option>
+                            <option value="Location">Location</option>
+                            <option value="Dept">Job Department</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <input type="text" id="filterText">
+                    </div>
+                    <div class="">
+                        <button class="go-button" onclick="filterConnection();">Go</button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <!-- first row of results (3 profiles) -->
+            <div class="box">
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <button class="view-button" id="button1" onclick="">View Profile</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="view-button" id="button2" onclick="">View Profile</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="view-button" id="button3" onclick="">View Profile</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="profile-pic" id="profilePic1"></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="profile-pic" id="profilePic2"></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="profile-pic" id="profilePic3"></div>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h4 id="fName1"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="fName2"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="fName3"></h4>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="expertise1"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="expertise2"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="expertise3"></h5>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="jobTitle1"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="jobTitle2"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="jobTitle3"></h5>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="location1"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location2"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location3"></h5>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <br>
+
+            <!-- second row of results (3 profiles) -->
+            <div class="box">
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <button class="view-button" id="button4" onclick="">View Profile</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="view-button" id="button5" onclick="">View Profile</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="view-button" id="button6" onclick="">View Profile</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="profile-pic" id="profilePic4"></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="profile-pic" id="profilePic5"></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="profile-pic" id="profilePic6"></div>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h4 id="fName4"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="fName5"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="fName6"></h4>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="expertise4"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="expertise5"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="expertise6"></h5>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="jobTitle4"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="jobTitle5"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="jobTitle6"></h5>
+                    </div>
+                </div>
+
+                <div class="row profileContent">
+                    <div class="col-4">
+                        <h5 id="location4"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location5"></h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 id="location6"></h5>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

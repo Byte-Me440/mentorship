@@ -98,6 +98,7 @@
     <Content Include="Web.config" />
     <Content Include="homeProfile.html" />
     <Content Include="connectionPage.html" />
+    <Content Include="myConnections.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
