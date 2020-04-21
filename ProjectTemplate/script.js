@@ -135,7 +135,7 @@ function postUser() {
     myers = usersArray[usersID]._MyersBriggs;
     document.getElementById("myersBriggs").innerHTML = myers;
     email = usersArray[usersID]._Email;
-    document.getElementById("userEmail").innerHTML = email; 
+    document.getElementById("userEmail").innerHTML = email;
     hobbies = usersArray[usersID]._Hobbies;
     document.getElementById("hobby1").innerHTML = hobbies;
     goals = usersArray[usersID]._CareerGoals;
@@ -189,10 +189,10 @@ function initialPostConnection() {
 function postConnection(connectionsArray=mentorsArray) {
 
     var arrayIndex = 0;
-    
+
     // hides all spots, enabling posting loop to show them
     for (let counter = 1; counter < 7; counter++) {
-        
+
         profilePicID = "#profilePic" + counter;
         fnameID = "#fName" + counter;
         expertiseID = "#expertise" + counter;
@@ -205,7 +205,7 @@ function postConnection(connectionsArray=mentorsArray) {
         $(jobTitleID).hide();
         $(locationID).hide();
     }
-    
+
     for (let counter = 1; counter < connectionsArray.length + 1; counter++) {
 
         // iterates across all of the users on the page
@@ -228,13 +228,13 @@ function postConnection(connectionsArray=mentorsArray) {
         $(locationID).text(connectionsArray[arrayIndex]._Location);
         console.log(connectionsArray[arrayIndex]._FirstName);
         arrayIndex++;
-        
+
         $(profilePicID).show();
         $(fnameID).show();
         $(expertiseID).show();
         $(jobTitleID).show();
         $(locationID).show();
-        
+
 
     }
 }
@@ -289,8 +289,5 @@ function filterConnection() {
             alert("Please Select a filter and try again")
             break;
     }
-
-        
-
 }
 
