@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Make A Connection!</title>
+    <title id="title">Make A Connection!</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
@@ -12,6 +12,7 @@
         $(document).ready(function () {
             initialPostConnection();
         });
+
     </script>
     <style type="text/css">
 
@@ -256,7 +257,7 @@
         <header>
             <div class="row search">
                 <div class="col-7">
-                    <h1>Make A Connection!</h1>
+                    <h1 id="topHeading">Make A Connection!</h1>
                 </div>
                 <div class="col-1">
                     <h5 style="margin: 20px 0;"><label>Search:</label></h5>
@@ -281,7 +282,7 @@
                         <button type="button" onclick="window.location.href = 'homeProfile.html';">My Profile</button>
                     </div>
                     <div class="col-4">
-                        <button type="button" onclick="window.location.href = 'myConnections.html';">My Connections</button>
+                        <button id="myConnectionsBtn" type="button" onclick="window.location.href = 'myConnections.html';">My Connections</button>
                     </div>
                     <div class="col-4">
                         <button onclick="logOff()">Log Out</button>
