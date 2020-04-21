@@ -287,12 +287,6 @@ function filterConnection() {
             alert("Please Select a filter and try again")
             break;
     }
-
-    function openUser(id) {
-        localStorage.setItem('UserId', id);
-        window.location.href = 'homeProfile.html';
-    }
-
         
 
 }
