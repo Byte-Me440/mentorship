@@ -86,10 +86,41 @@
     <script>
         function submitEditUsers() {
 
-            var webMethod = "ProjectServices.asmx/ImportUsers";
+
+            // variable to store the concatenated character skills
+            var availabilityTime = '';
+
+            // make an empty variable to store the concatenated strings, and a variable to get and store all the skills into one variable by name attribute
+            var timeInput = document.getElementsByName('availTime');
+
+            // use for loop to go through all the checkboxes, if the input is checkbox and name is knownskills and if it is checked, concatenate the skills
+            for (var x = 0; x < timeInput.length; x++) {
+                if (timeInput[x].type == "checkbox" && timeInput[x].name == 'availTime') {
+                    if (timeInput[x].checked == true) {
+                        availabilityTime += timeInput[x].value + ',';
+                    }
+                }
+            }
+
+
+            var availabilityType = '';
+
+            // make an empty variable to store the concatenated strings, and a variable to get and store all the skills into one variable by name attribute
+            var typeInput = document.getElementsByName('availType');
+
+            // use for loop to go through all the checkboxes, if the input is checkbox and name is knownskills and if it is checked, concatenate the skills
+            for (var x = 0; x < typeInput.length; x++) {
+                if (typeInput[x].type == "checkbox" && typeInput[x].name == 'availType') {
+                    if (typeInput[x].checked == true) {
+                        availabilityType += typeInput[x].value + ',';
+                    }
+                }
+            }
 
             var fName = document.getElementById("fName").value;
             var lName = document.getElementById("lName").value;
+
+            var bio = document.getElementById("bio").value;
 
             var myersBriggs = document.getElementById("myersBriggs").value;
             var hobby1 = document.getElementById("hobby1").value;
@@ -104,15 +135,35 @@
             var edFocus = document.getElementById("edFocus").value;
 
             var userLocation = document.getElementById("userLocation").value;
-            var availabilityTime = document.getElementsByName("availTime").value;
-            var availabilityType = document.getElementsByName("availType").value;
+
+            console.log(fName);
+            console.log(lName);
+            console.log(bio);
+            console.log(myersBriggs);
+            console.log(hobby1);
+            console.log(goal1);
+            console.log(jobTitle);
+            console.log(jobDept);
+            console.log(university);
+            console.log(gradYear);
+            console.log(edLevel);
+            console.log(edFocus);
+            console.log(userLocation);
+            console.log(availabilityTime);
+            console.log(availabilityType);
+            
+            //var availabilityTime = document.getElementsByName("availTime").value;
+            //var availabilityType = document.getElementsByName("availType").value;
             //var jobLocation = document.getElementById("jobLocation").value;
 
             // dont forget to grab all the checkbox data and place in an array to insert back into the database
 
+            var webMethod = "ProjectServices.asmx/UpdateAccount";
+
 
             var parameters = "{\"FirstName\":\"" + encodeURI(fName)
                 + "\", \"LastName\":\"" + encodeURI(lName)
+                + "\", \"LastName\":\"" + encodeURI(bio)
                 + "\", \"MyersBriggs\":\"" + encodeURI(myersBriggs)
                 + "\", \"Hobbies\":\"" + encodeURI(hobby1)
                 + "\", \"CareerGoals\":\"" + encodeURI(goal1)
@@ -135,9 +186,14 @@
                 dataType: "json",
                 success: function (msg) {
                     var responsefromserver = msg.d;
+                    alert("success. edited user");
                     console.log(responsefromserver);
-                    //window.location.href = 'homeProfile.html';
+                    window.location.href = 'homeProfile.html';
                 },
+                error: function (e) {
+                    alert("Error in javascript.");
+                    console.log(e.toString());
+                }
             });
         }
     </script>
@@ -693,7 +749,7 @@
         <br>
 
 
-        <div>
+        <div align="right">
             <button type="button" onclick="submitEditUsers()">Save Changes</button>
         </div>
 

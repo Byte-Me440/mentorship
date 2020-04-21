@@ -355,6 +355,81 @@ namespace ProjectTemplate
         }
 
 
+        //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
+        [WebMethod(EnableSession = true)]
+        public String UpdateUser(string fName, string lName, string bio, string myersBriggs, string hobby, string goal, string jobTitle, string JobDept, string university, string gradYear, string edLevel, string edFocus, string userLocation, string availTime, string availType)
+        {
+            string sqlConnectString = getConString();
+
+            //this is a simple update, with parameters to pass in values
+            string sqlUpdate =
+                "UPDATE byteme.USERS SET " +
+                "FirstName=@fName, " +
+                "LastName=@lName, " +
+                "Bio=@bio, " +
+                "MyersBriggs=@myers, " +
+                "Hobbies=@hobbies, " +
+                "CareerGoals=@goals, " +
+                "JobTitle=@jobTitle, " +
+                "Department=@dept, " +
+                "University=@university, " +
+                "GradDate=@gradDate, " +
+                "EdLevel=@edLevel, " +
+                "EdFocus=@edFocus, " +
+                "Location=@location, " +
+                "AvailabilityTimes=@availTime, " +
+                "AvailabilityType=@availType, " +
+                "WHERE " +
+                "UserID = @userId ";
+            //COMMENTING TO CHECK IF QUERY WORKS
+            //"KnownSkills=@knownSkills " +
+
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlUpdate, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
+            sqlCommand.Parameters.AddWithValue("@fName", HttpUtility.UrlDecode(fName));
+            sqlCommand.Parameters.AddWithValue("@lName", HttpUtility.UrlDecode(lName));
+            sqlCommand.Parameters.AddWithValue("@bio", HttpUtility.UrlDecode(bio));
+            sqlCommand.Parameters.AddWithValue("@myers", HttpUtility.UrlDecode(myersBriggs));
+            sqlCommand.Parameters.AddWithValue("@hobbies", HttpUtility.UrlDecode(hobby));
+            sqlCommand.Parameters.AddWithValue("@goals", HttpUtility.UrlDecode(goal));
+            sqlCommand.Parameters.AddWithValue("@jobTitle", HttpUtility.UrlDecode(jobTitle));
+            sqlCommand.Parameters.AddWithValue("@dept", HttpUtility.UrlDecode(JobDept));
+            sqlCommand.Parameters.AddWithValue("@university", HttpUtility.UrlDecode(university));
+            sqlCommand.Parameters.AddWithValue("@gradDate", HttpUtility.UrlDecode(gradYear));
+            sqlCommand.Parameters.AddWithValue("@edLevel", HttpUtility.UrlDecode(edLevel));
+            sqlCommand.Parameters.AddWithValue("@edFocus", HttpUtility.UrlDecode(edFocus));
+            sqlCommand.Parameters.AddWithValue("@location", HttpUtility.UrlDecode(userLocation));
+            sqlCommand.Parameters.AddWithValue("@availTime", HttpUtility.UrlDecode(availTime));
+            sqlCommand.Parameters.AddWithValue("@availType", HttpUtility.UrlDecode(availType));
+
+            sqlConnection.Open();
+            //we're using a try/catch so that if the query errors out we can handle it gracefully
+            //by closing the connection and moving on
+            try
+            {
+                int rowCheck = sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                if (rowCheck.Equals(1))
+                {
+                    return "backend. Successfully Edited User";
+                }
+                else
+                {
+                    return "backend. Changes Failed";
+                }
+            }
+            catch (Exception e)
+            {
+                sqlConnection.Close();
+                return e.ToString();
+            }
+        }
+
+
+
         [WebMethod(EnableSession = true)]
         public String DeleteAccount(string charName)
         {
