@@ -1,13 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8" />
     <title>Home</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+
     <script>
         $(document).ready(function () {
             postEditUser();
@@ -151,19 +152,20 @@
             console.log(userLocation);
             console.log(availabilityTime);
             console.log(availabilityType);
-            
+
             //var availabilityTime = document.getElementsByName("availTime").value;
             //var availabilityType = document.getElementsByName("availType").value;
             //var jobLocation = document.getElementById("jobLocation").value;
 
             // dont forget to grab all the checkbox data and place in an array to insert back into the database
 
+            //var webMethod = "ProjectServices.asmx/UpdateUser";
             var webMethod = "ProjectServices.asmx/UpdateAccount";
 
 
             var parameters = "{\"FirstName\":\"" + encodeURI(fName)
                 + "\", \"LastName\":\"" + encodeURI(lName)
-                + "\", \"LastName\":\"" + encodeURI(bio)
+                + "\", \"Bio\":\"" + encodeURI(bio)
                 + "\", \"MyersBriggs\":\"" + encodeURI(myersBriggs)
                 + "\", \"Hobbies\":\"" + encodeURI(hobby1)
                 + "\", \"CareerGoals\":\"" + encodeURI(goal1)

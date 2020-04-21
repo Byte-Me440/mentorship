@@ -380,7 +380,7 @@ namespace ProjectTemplate
                 "AvailabilityTimes=@availTime, " +
                 "AvailabilityType=@availType, " +
                 "WHERE " +
-                "UserID = @userId ";
+                "UserID = @UserId ";
             //COMMENTING TO CHECK IF QUERY WORKS
             //"KnownSkills=@knownSkills " +
 
@@ -388,7 +388,7 @@ namespace ProjectTemplate
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlUpdate, sqlConnection);
 
-            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
+            sqlCommand.Parameters.AddWithValue("@UserId", Session["UserId"]);
             sqlCommand.Parameters.AddWithValue("@fName", HttpUtility.UrlDecode(fName));
             sqlCommand.Parameters.AddWithValue("@lName", HttpUtility.UrlDecode(lName));
             sqlCommand.Parameters.AddWithValue("@bio", HttpUtility.UrlDecode(bio));
