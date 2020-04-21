@@ -133,9 +133,12 @@ function postUser() {
     welcome = usersArray[usersID]._FirstName;
     document.getElementById("welcomeFname").innerHTML = welcome;
     myers = usersArray[usersID]._MyersBriggs;
-    document.getElementById("userEmail").innerHTML = email;
-    email = usersArray[usersID]._Email;
     document.getElementById("myersBriggs").innerHTML = myers;
+
+
+    email = usersArray[usersID]._Email;
+    document.getElementById("userEmail").innerHTML = email;
+    
     hobbies = usersArray[usersID]._Hobbies;
     document.getElementById("hobby1").innerHTML = hobbies;
     goals = usersArray[usersID]._CareerGoals;
