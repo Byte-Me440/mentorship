@@ -345,9 +345,9 @@
         </div>
 
         <div class="profile-box">
-            <h5> 
-                <input type="text" id="userLocation" placeholder="City" style="width: 200px; text-align: center;"> 
-            </h5> 
+            <h5>
+                <input type="text" id="userLocation" placeholder="City" style="width: 200px; text-align: center;">
+            </h5>
         </div>
 
         <nav class="pages">
@@ -367,10 +367,10 @@
 
             <div class="contents">
                 <section>
-                    
 
 
-                        <!-- Bio Section -->
+
+                    <!-- Bio Section -->
                     <div class="row">
                         <h3 class="col-1">Bio:</h3>
                         <textarea class="col-11" id="bio" style="height: 100px; text-align:left;"></textarea>
@@ -379,49 +379,49 @@
 
 
 
-                        <br>
+                    <br>
 
-                        <!-- Myers Briggs -->
-                        <div class="row">
-                            <div class="col-2">
-                                <label class="topics">Myers Briggs:</label>
-                                <!--<input type="text" id="myersBriggs" />-->
-                                <!--<p id="myersBriggs"></p>-->
-                            </div>
-                            <div class="col-10">
-                                <input type="text" id="myersBriggs" style="text-align: center;">
-                            </div>
+                    <!-- Myers Briggs -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label class="topics">Myers Briggs:</label>
+                            <!--<input type="text" id="myersBriggs" />-->
+                            <!--<p id="myersBriggs"></p>-->
+                        </div>
+                        <div class="col-10">
+                            <input type="text" id="myersBriggs" style="text-align: center;">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- Hobbies -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label class="topics">Hobbies:</label>
                         </div>
 
-                        <br>
-
-                        <!-- Hobbies -->
-                        <div class="row">
-                            <div class="col-2">
-                                <label class="topics">Hobbies:</label>
-                            </div>
-
-                            <div class="col-10">
-                                <input type="text" id="hobby1" style="text-align: center;">
-
-                            </div>
-                        </div>
-
-                        <br>
-
-                        <!-- Career Goals -->
-                        <div class="row">
-                            <div class="col-3">
-                                <label class="topics">Career Goals:</label>
-                            </div>
-
-                            <div class="col-9">
-                                <input type="text" id="goal1" style="text-align: center;">
-                            </div>
+                        <div class="col-10">
+                            <input type="text" id="hobby1" style="text-align: center;">
 
                         </div>
+                    </div>
 
-                        <br>
+                    <br>
+
+                    <!-- Career Goals -->
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="topics">Career Goals:</label>
+                        </div>
+
+                        <div class="col-9">
+                            <input type="text" id="goal1" style="text-align: center;">
+                        </div>
+
+                    </div>
+
+                    <br>
                 </section>
 
                 <section>
@@ -552,28 +552,28 @@
                         <div class="row">
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availEmail" value="Email" name="availType" disabled>
-                                    <label for="availEmail">Email</label>-->
+                                <label for="availEmail">Email</label>-->
                                 <input type="checkbox" id="phone" value="Phone" name="availType" disabled>
                                 <label for="phone">Phone</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                                    <label for="availPerson">In Person</label>-->
+                                <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="text" value="Text" name="availType" disabled>
                                 <label for="text">Text</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                                    <label for="availPerson">In Person</label>-->
+                                <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="internet" value="Internet" name="availType" disabled>
                                 <label for="internet">Internet</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                                    <label for="availPerson">In Person</label>-->
+                                <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="inPerson" value="In-Person" name="availType" disabled>
                                 <label for="inPerson">In-Person</label>
                             </div>
@@ -692,11 +692,16 @@
 
         <br>
 
+
+        <div>
+            <button type="button" onclick="submitEditUsers()">Save Changes</button>
+        </div>
+
     </div>
 
-    <div>
-       <!-- <button type="button" onclick="submitEditCharacter()">Save Changes</button>-->
-    </div>
+    <!--<div>
+        <button type="button" onclick="submitEditUsers()">Save Changes</button>
+    </div>-->
 
 </body>
 </html>
