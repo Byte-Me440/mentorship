@@ -1,3 +1,52 @@
+usersArray = [];
+mentorsArray = [];
+connectionsPageDisplayArray = [];
+matchedUser = [];
+
+// https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
+function editDistance(s1, s2) {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+
+    var costs = new Array();
+    for (var i = 0; i <= s1.length; i++) {
+        var lastValue = i;
+        for (var j = 0; j <= s2.length; j++) {
+            if (i == 0)
+                costs[j] = j;
+            else {
+                if (j > 0) {
+                    var newValue = costs[j - 1];
+                    if (s1.charAt(i - 1) != s2.charAt(j - 1))
+                        newValue = Math.min(Math.min(newValue, lastValue),
+                            costs[j]) + 1;
+                    costs[j - 1] = lastValue;
+                    lastValue = newValue;
+                }
+            }
+        }
+        if (i > 0)
+            costs[s2.length] = lastValue;
+    }
+    return costs[s2.length];
+}
+
+// https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
+// used for fuzzy string comparison
+function similarity(s1, s2) {
+    var longer = s1;
+    var shorter = s2;
+    if (s1.length < s2.length) {
+        longer = s2;
+        shorter = s1;
+    }
+    var longerLength = longer.length;
+    if (longerLength == 0) {
+        return 1.0;
+    }
+    return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+}
+
 function createAccount() {
     var id = document.getElementById("createId").value;
     var pass = document.getElementById("createPass").value;
@@ -93,9 +142,6 @@ function logOff() {
     });
 }
 
-usersArray = [];
-mentorsArray = [];
-connectionsPageDisplayArray = [];
 
 function importUsers(){
     var webMethod = "ProjectServices.asmx/ImportUsers";
@@ -119,54 +165,120 @@ function importUsers(){
     })
 }
 
+
 function postUser() {
 
     importUsers();
 
     var usersID = localStorage.getItem("UserId") - 1;
 
-    // mapping from webcall to html page
-    firstName = usersArray[usersID]._FirstName;
-    document.getElementById("fName").innerHTML = firstName;
-    lastName = usersArray[usersID]._LastName;
-    document.getElementById("lName").innerHTML = lastName;
-    welcome = usersArray[usersID]._FirstName;
-    document.getElementById("welcomeFname").innerHTML = welcome;
-    myers = usersArray[usersID]._MyersBriggs;
-    document.getElementById("myersBriggs").innerHTML = myers;
-    hobbies = usersArray[usersID]._Hobbies;
-    document.getElementById("hobby1").innerHTML = hobbies;
-    goals = usersArray[usersID]._CareerGoals;
-    document.getElementById("goal1").innerHTML = goals;
-    jobTitle = usersArray[usersID]._JobTitle;
-    document.getElementById("jobTitle").innerHTML = jobTitle;
-    department = usersArray[usersID]._Department;
-    document.getElementById("jobDept").innerHTML = department;
-    university = usersArray[usersID]._University;
-    document.getElementById("university").innerHTML = university;
-    gradDate = usersArray[usersID]._GradDate;
-    document.getElementById("gradYear").innerHTML = gradDate;
-    eduLevel = usersArray[usersID]._EdLevel;
-    document.getElementById("edLevel").innerHTML = eduLevel;
-    eduFocus = usersArray[usersID]._EdFocus;
-    document.getElementById("edFocus").innerHTML = eduFocus;
-    loc = usersArray[usersID]._Location;
-    document.getElementById("userLocation").innerHTML = loc;
-    // make sure there is two different locations job vs user location
-    jobLoc = usersArray[usersID]._Location;
-    document.getElementById("jobLocation").innerHTML = jobLoc;
-    availabilityType = usersArray[usersID]._AvailabilityType;
-    for (i = 0; i < availabilityType.length; i++) {
-        $("input[name='availType']").filter(function () {
-            return availabilityType[i].indexOf(this.value) != -1;
-        }).prop("checked", true);
+    if (matchedUser.length < 1) {
+        // mapping from webcall to html page
+        firstName = usersArray[usersID]._FirstName;
+        document.getElementById("fName").innerHTML = firstName;
+        lastName = usersArray[usersID]._LastName;
+        document.getElementById("lName").innerHTML = lastName;
+        welcome = usersArray[usersID]._FirstName;
+        document.getElementById("welcomeFname").innerHTML = welcome;
+        myers = usersArray[usersID]._MyersBriggs;
+        document.getElementById("myersBriggs").innerHTML = myers;
+        hobbies = usersArray[usersID]._Hobbies;
+        document.getElementById("hobby1").innerHTML = hobbies;
+        goals = usersArray[usersID]._CareerGoals;
+        document.getElementById("goal1").innerHTML = goals;
+        jobTitle = usersArray[usersID]._JobTitle;
+        document.getElementById("jobTitle").innerHTML = jobTitle;
+        department = usersArray[usersID]._Department;
+        document.getElementById("jobDept").innerHTML = department;
+        university = usersArray[usersID]._University;
+        document.getElementById("university").innerHTML = university;
+        gradDate = usersArray[usersID]._GradDate;
+        document.getElementById("gradYear").innerHTML = gradDate;
+        eduLevel = usersArray[usersID]._EdLevel;
+        document.getElementById("edLevel").innerHTML = eduLevel;
+        eduFocus = usersArray[usersID]._EdFocus;
+        document.getElementById("edFocus").innerHTML = eduFocus;
+        loc = usersArray[usersID]._Location;
+        document.getElementById("userLocation").innerHTML = loc;
+        // make sure there is two different locations job vs user location
+        jobLoc = usersArray[usersID]._Location;
+        document.getElementById("jobLocation").innerHTML = jobLoc;
+        availabilityType = usersArray[usersID]._AvailabilityType;
+        for (i = 0; i < availabilityType.length; i++) {
+            $("input[name='availType']").filter(function () {
+                return availabilityType[i].indexOf(this.value) != -1;
+            }).prop("checked", true);
+        }
+        availabilityTimes = usersArray[usersID]._AvailabilityTimes;
+        for (i = 0; i < availabilityTimes.length; i++) {
+            $("input[name='availTime']").filter(function () {
+                return availabilityTimes[i].indexOf(this.value) != -1;
+            }).prop("checked", true);
+        }
+
     }
-    availabilityTimes = usersArray[usersID]._AvailabilityTimes;
-    for (i = 0; i < availabilityTimes.length; i++) {
-        $("input[name='availTime']").filter(function () {
-            return availabilityTimes[i].indexOf(this.value) != -1;
-        }).prop("checked", true);
+
+    else {
+        usersID = 0;
+        firstName = matchedUser[usersID]._FirstName;
+        document.getElementById("fName").innerHTML = firstName;
+        lastName = matchedUser[usersID]._LastName;
+        document.getElementById("lName").innerHTML = lastName;
+        welcome = matchedUser[usersID]._FirstName;
+        document.getElementById("welcomeFname").innerHTML = welcome;
+        myers = matchedUser[usersID]._MyersBriggs;
+        document.getElementById("myersBriggs").innerHTML = myers;
+        hobbies = matchedUser[usersID]._Hobbies;
+        document.getElementById("hobby1").innerHTML = hobbies;
+        goals = matchedUser[usersID]._CareerGoals;
+        document.getElementById("goal1").innerHTML = goals;
+        jobTitle = matchedUser[usersID]._JobTitle;
+        document.getElementById("jobTitle").innerHTML = jobTitle;
+        department = matchedUser[usersID]._Department;
+        document.getElementById("jobDept").innerHTML = department;
+        university = matchedUser[usersID]._University;
+        document.getElementById("university").innerHTML = university;
+        gradDate = matchedUser[usersID]._GradDate;
+        document.getElementById("gradYear").innerHTML = gradDate;
+        eduLevel = matchedUser[usersID]._EdLevel;
+        document.getElementById("edLevel").innerHTML = eduLevel;
+        eduFocus = matchedUser[usersID]._EdFocus;
+        document.getElementById("edFocus").innerHTML = eduFocus;
+        loc = matchedUser[usersID]._Location;
+        document.getElementById("userLocation").innerHTML = loc;
+        // make sure there is two different locations job vs user location
+        jobLoc = matchedUser[usersID]._Location;
+        document.getElementById("jobLocation").innerHTML = jobLoc;
+        availabilityType = matchedUser[usersID]._AvailabilityType;
+        for (i = 0; i < availabilityType.length; i++) {
+            $("input[name='availType']").filter(function () {
+                return availabilityType[i].indexOf(this.value) != -1;
+            }).prop("checked", true);
+        }
+        availabilityTimes = matchedUser[usersID]._AvailabilityTimes;
+        for (i = 0; i < availabilityTimes.length; i++) {
+            $("input[name='availTime']").filter(function () {
+                return availabilityTimes[i].indexOf(this.value) != -1;
+            }).prop("checked", true);
+        }
+
     }
+
+    matchedUser = [];
+}
+
+function searchUser() {
+    similarityBar = 1000
+    matchedUser = usersArray.filter(function (e) {
+        signal = e._FirstName + " " + e._LastName === $("#searchBar").val();
+        return signal;
+    })
+
+}
+
+function searchUserPosting() {
+    searchUser();
+    window.location.href = 'homeProfile.html';
 }
 
 function initialPostConnection() {
@@ -187,10 +299,10 @@ function initialPostConnection() {
 function postConnection(connectionsArray=mentorsArray) {
 
     var arrayIndex = 0;
-    
+
     // hides all spots, enabling posting loop to show them
     for (let counter = 1; counter < 7; counter++) {
-        
+
         profilePicID = "#profilePic" + counter;
         fnameID = "#fName" + counter;
         expertiseID = "#expertise" + counter;
@@ -203,7 +315,7 @@ function postConnection(connectionsArray=mentorsArray) {
         $(jobTitleID).hide();
         $(locationID).hide();
     }
-    
+
     for (let counter = 1; counter < connectionsArray.length + 1; counter++) {
 
         // iterates across all of the users on the page
@@ -226,13 +338,13 @@ function postConnection(connectionsArray=mentorsArray) {
         $(locationID).text(connectionsArray[arrayIndex]._Location);
         console.log(connectionsArray[arrayIndex]._FirstName);
         arrayIndex++;
-        
+
         $(profilePicID).show();
         $(fnameID).show();
         $(expertiseID).show();
         $(jobTitleID).show();
         $(locationID).show();
-        
+
 
     }
 }
@@ -287,8 +399,6 @@ function filterConnection() {
             alert("Please Select a filter and try again")
             break;
     }
-
-        
 
 }
 
