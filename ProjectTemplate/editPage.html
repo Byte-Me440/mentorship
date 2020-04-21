@@ -3,15 +3,145 @@
 <head>
     <meta charset="utf-8" />
     <title>Home</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
     <script>
+        $(document).ready(function () {
+            postEditUser();
+        });
+    </script>
+
+    <!--<script>
         $(document).ready(function () {
             postUser();
             $("body").css("cursor", "default");
         });
+    </script>-->
+
+    <script>
+        function postEditUser() {
+            var webMethod = "ProjectServices.asmx/ImportUsers"
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var usersArray = data.d;
+                    //var usersID = localStorage.getItem('usersid');
+                    var usersID = localStorage.getItem("UserId") - 1;
+
+                    //var usersID = 1;
+                    console.log(usersArray);
+
+                    //welcome = usersArray[usersID]._FirstName;
+                    //document.getElementById("welcomeFname").innerHTML = welcome;
+
+                    $("#fName").val(usersArray[usersID]._FirstName);
+                    $("#lName").val(usersArray[usersID]._LastName);
+                    $("#welcomeFname").val(usersArray[usersID]._FirstName);
+
+                    $("#myersBriggs").val(usersArray[usersID]._MyersBriggs);
+                    $("#hobby1").val(usersArray[usersID]._Hobbies);
+                    $("#goal1").val(usersArray[usersID]._CareerGoals);
+
+                    $("#jobTitle").val(usersArray[usersID]._JobTitle);
+                    $("#jobDept").val(usersArray[usersID]._Department);
+                    $("#university").val(usersArray[usersID]._University);
+
+                    $("#gradYear").val(usersArray[usersID]._GradDate);
+                    $("#edLevel").val(usersArray[usersID]._EdLevel);
+                    $("#edFocus").val(usersArray[usersID]._EdFocus);
+
+                    $("#userLocation").val(usersArray[usersID]._Location);
+                    $("#jobLocation").val(usersArray[usersID]._Location);
+
+
+                    availabilityType = usersArray[usersID]._AvailabilityType;
+                    console.log(availabilityType);
+
+                    for (i = 0; i < availabilityType.length; i++) {
+                        $("input[name='availType']").filter(function () {
+                            return availabilityType[i].indexOf(this.value) != -1;
+                        }).prop("checked", true);
+                    }
+
+
+                    availabilityTimes = usersArray[usersID]._AvailabilityTimes;
+                    console.log(availabilityTimes);
+
+                    for (i = 0; i < availabilityTimes.length; i++) {
+                        $("input[name='availTime']").filter(function () {
+                            return availabilityTimes[i].indexOf(this.value) != -1;
+                        }).prop("checked", true);
+                    }
+                }
+            });
+        }
     </script>
+    <script>
+        function submitEditUsers() {
+
+            var webMethod = "ProjectServices.asmx/ImportUsers";
+
+            var fName = document.getElementById("fName").value;
+            var lName = document.getElementById("lName").value;
+
+            var myersBriggs = document.getElementById("myersBriggs").value;
+            var hobby1 = document.getElementById("hobby1").value;
+            var goal1 = document.getElementById("goal1").value;
+
+            var jobTitle = document.getElementById("jobTitle").value;
+            var jobDept = document.getElementById("jobDept").value;
+            var university = document.getElementById("university").value;
+
+            var gradYear = document.getElementById("gradYear").value;
+            var edLevel = document.getElementById("edLevel").value;
+            var edFocus = document.getElementById("edFocus").value;
+
+            var userLocation = document.getElementById("userLocation").value;
+            var availabilityTime = document.getElementsByName("availTime").value;
+            var availabilityType = document.getElementsByName("availType").value;
+            //var jobLocation = document.getElementById("jobLocation").value;
+
+            // dont forget to grab all the checkbox data and place in an array to insert back into the database
+
+
+            var parameters = "{\"FirstName\":\"" + encodeURI(fName)
+                + "\", \"LastName\":\"" + encodeURI(lName)
+                + "\", \"MyersBriggs\":\"" + encodeURI(myersBriggs)
+                + "\", \"Hobbies\":\"" + encodeURI(hobby1)
+                + "\", \"CareerGoals\":\"" + encodeURI(goal1)
+                + "\", \"JobTitle\":\"" + encodeURI(jobTitle)
+                + "\", \"Department\":\"" + encodeURI(jobDept)
+                + "\", \"University\":\"" + encodeURI(university)
+                + "\", \"GradDate\":\"" + encodeURI(gradYear)
+                + "\", \"EdLevel\":\"" + encodeURI(edLevel)
+                + "\", \"EdFocus\":\"" + encodeURI(edFocus)
+                + "\", \"Location\":\"" + encodeURI(userLocation)
+                + "\", \"AvailabilityTimes\":\"" + encodeURI(availabilityTime)
+                + "\", \"AvailabilityType\":\"" + encodeURI(availabilityType)
+                + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var responsefromserver = msg.d;
+                    console.log(responsefromserver);
+                    //window.location.href = 'homeProfile.html';
+                },
+            });
+        }
+    </script>
+
     <style type="text/css">
 
         body {
@@ -89,8 +219,7 @@
             text-align: center;
             float: right;
             font-family: Georgia, serif;
-
-          }
+        }
 
         .pages {
             padding: 1.5em;
@@ -194,27 +323,31 @@
         <br>
 
         <header>
-            <h1>Home</h1>
+            <h1>EDIT Home Page</h1>
         </header>
 
         <!-- top navigation to go to other pages, edit or log out -->
         <nav class="topNav">
-            <button type="button" onclick="window.location.href = 'connectionPage.html';">Create Connection</button>
-            <button type="button" onclick="window.location.href = 'myConnections.html';">My Connections</button>
-            <button type="button" onclick="window.location.href = 'editPage.html';">Edit</button>
-            <button onclick="logOff()">Log Out</button>
+            <button>Create Connection</button>
+            <button>Messages</button>
+            <button>Edit</button>
+            <button>Log Out</button>
         </nav>
 
         <!-- left side of the page -->
         <div class="profile-pic"></div>
 
         <div class="profile-box">
-            <h4> <label id="fName"> </label> <label id="lName"> </label> </h4>
-
+            <h4>
+                <input type="text" id="fName" placeholder="first name" style="width: 200px; text-align: center;">
+                <input type="text" id="lName" placeholder="last name" style="width: 200px; text-align: center;">
+            </h4>
         </div>
 
         <div class="profile-box">
-            <h5 id="userLocation"></h5>
+            <h5> 
+                <input type="text" id="userLocation" placeholder="City" style="width: 200px; text-align: center;"> 
+            </h5> 
         </div>
 
         <nav class="pages">
@@ -234,13 +367,17 @@
 
             <div class="contents">
                 <section>
-                    <a id="profile_bio">
+                    
 
 
                         <!-- Bio Section -->
-                        <h3>Bio</h3>
+                    <div class="row">
+                        <h3 class="col-1">Bio:</h3>
+                        <textarea class="col-11" id="bio" style="height: 100px; text-align:left;"></textarea>
+                    </div>
 
-                        <p id="bio"></p>
+
+
 
                         <br>
 
@@ -252,7 +389,7 @@
                                 <!--<p id="myersBriggs"></p>-->
                             </div>
                             <div class="col-10">
-                                <p id="myersBriggs" style="text-align: left;"></p>
+                                <input type="text" id="myersBriggs" style="text-align: center;">
                             </div>
                         </div>
 
@@ -265,24 +402,10 @@
                             </div>
 
                             <div class="col-10">
-                                <p id="hobby1"></p>
+                                <input type="text" id="hobby1" style="text-align: center;">
+
                             </div>
-
                         </div>
-
-
-                        <!--<div class="row">
-                    <div class="col-12">
-                        <p id="hobby2"></p>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-12">
-                        <p id="hobby3"></p>
-                    </div>
-                </div>-->
 
                         <br>
 
@@ -293,28 +416,12 @@
                             </div>
 
                             <div class="col-9">
-                                <p id="goal1"></p>
+                                <input type="text" id="goal1" style="text-align: center;">
                             </div>
 
                         </div>
 
-
-                        <!--<div class="row">
-                    <div class="col-12">
-                        <p id="goal2"></p>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-12">
-                        <p id="goal3"></p>
-                    </div>
-                </div>-->
-
                         <br>
-
-                    </a>
                 </section>
 
                 <section>
@@ -331,7 +438,8 @@
                                 <label class="topics">Job Title:</label>
                             </div>
                             <div class="col-9">
-                                <p id="jobTitle"></p>
+                                <input type="text" id="jobTitle" style="text-align: center;">
+
                             </div>
                         </div>
 
@@ -341,7 +449,8 @@
                                 <label class="topics">Department:</label>
                             </div>
                             <div class="col-9">
-                                <p id="jobDept"></p>
+                                <input type="text" id="jobDept" style="text-align: center;">
+
                             </div>
                         </div>
 
@@ -351,7 +460,8 @@
                                 <label class="topics">Location:</label>
                             </div>
                             <div class="col-9">
-                                <p id="jobLocation"></p>
+                                <input type="text" id="jobLocation" style="text-align: center;">
+
                             </div>
                         </div>
 
@@ -374,13 +484,15 @@
                                 <label class="topics">University:</label>
                             </div>
                             <div class="col-5">
-                                <p id="university"></p>
+                                <input type="text" id="university" style="text-align: center;">
+
                             </div>
                             <div class="col-2">
                                 <label class="topics">Grad Date:</label>
                             </div>
                             <div class="col-3">
-                                <p id="gradYear"></p>
+                                <input type="text" id="gradYear" style="text-align: center;">
+
                             </div>
                         </div>
 
@@ -389,7 +501,8 @@
                                 <label class="topics">Education Level:</label>
                             </div>
                             <div class="col-9">
-                                <p id="edLevel"></p>
+                                <input type="text" id="edLevel" style="text-align: center;">
+
                             </div>
                         </div>
 
@@ -398,7 +511,8 @@
                                 <label class="topics">Education Focus:</label>
                             </div>
                             <div class="col-9">
-                                <p id="edFocus"></p>
+                                <input type="text" id="edFocus" style="text-align: center;">
+
                             </div>
                         </div>
 
@@ -417,8 +531,6 @@
 
 
                         <br>
-
-
                     </a>
                 </section>
 
@@ -440,28 +552,28 @@
                         <div class="row">
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availEmail" value="Email" name="availType" disabled>
-                            <label for="availEmail">Email</label>-->
+                                    <label for="availEmail">Email</label>-->
                                 <input type="checkbox" id="phone" value="Phone" name="availType" disabled>
                                 <label for="phone">Phone</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                            <label for="availPerson">In Person</label>-->
+                                    <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="text" value="Text" name="availType" disabled>
                                 <label for="text">Text</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                            <label for="availPerson">In Person</label>-->
+                                    <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="internet" value="Internet" name="availType" disabled>
                                 <label for="internet">Internet</label>
                             </div>
 
                             <div class="col-3">
                                 <!--<input type="checkbox" id="availPerson" value="In Person" name="availType" disabled>
-                            <label for="availPerson">In Person</label>-->
+                                    <label for="availPerson">In Person</label>-->
                                 <input type="checkbox" id="inPerson" value="In-Person" name="availType" disabled>
                                 <label for="inPerson">In-Person</label>
                             </div>
@@ -573,25 +685,18 @@
                                 <label for="friEvening">Evening</label>
                             </div>
                         </div>
-
-
                     </a>
                 </section>
-
             </div>
-
-            <br>
-
-            <div class="">
-                <button style="float:right;">Edit Profile</button>
-            </div>
-
         </main>
 
         <br>
 
     </div>
 
+    <div>
+       <!-- <button type="button" onclick="submitEditCharacter()">Save Changes</button>-->
+    </div>
 
 </body>
 </html>
